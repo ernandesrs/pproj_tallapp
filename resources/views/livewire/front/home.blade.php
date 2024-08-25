@@ -9,7 +9,7 @@
             Register
         </x-front.clickable>
 
-        <x-front.clickable>
+        <x-front.clickable href="{{ route('admin.overview') }}">
             Administrative
         </x-front.clickable>
 
@@ -21,7 +21,8 @@
     <hr class="border-zinc-800 my-5">
 
     <small>
-        {{ config('app.name') }} &copy; {{ date('Y') }} by <a class="text-indigo-700 hover:text-indigo-600 duration-300"
+        {{ config('app.name') }} &copy; {{ date('Y') }} by <a
+            class="text-indigo-700 hover:text-indigo-600 duration-300"
             href="https://github.com/ernandesrs"
             title="Github profile" target="_blank">
             Ernandes R Souza

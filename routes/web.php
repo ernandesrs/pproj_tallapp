@@ -14,3 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', \App\Livewire\Front\Home::class)->name('front.home');
+
+Route::group([
+    'prefix' => 'admin'
+], function () {
+
+    Route::get('/', \App\Livewire\Admin\Overview::class)->name('admin.overview');
+
+});
