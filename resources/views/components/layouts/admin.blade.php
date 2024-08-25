@@ -14,7 +14,7 @@
 
 <body class="">
     <x-layouts.wrappers.layout>
-        <x-layouts.wrappers.aside>
+        <x-layouts.wrappers.aside mini>
             Aside
         </x-layouts.wrappers.aside>
 
