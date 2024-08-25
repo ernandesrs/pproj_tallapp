@@ -2,7 +2,7 @@
 
     {{-- main header --}}
     @isset($header)
-        <div class="bg-zinc-800 flex items-center">
+        <header class="bg-zinc-800 flex items-center">
             {{ $header }}
 
             {{-- menu toggler wrapper --}}
@@ -20,11 +20,11 @@
                     @endisset
                 </div>
             </div>
-        </div>
+        </header>
     @endisset
 
     {{-- main content --}}
-    <div class="flex-1 flex flex-col bg-zinc-700">
+    <main class="flex-1 flex flex-col bg-zinc-700">
         {{ $slot }}
-    </div>
+    </main>
 </div>

@@ -18,13 +18,13 @@
             Aside
         </x-layouts.wrappers.aside>
 
-        <x-layouts.wrappers.content>
+        <x-layouts.wrappers.section>
             <x-slot name="header">
                 HEADER
             </x-slot>
 
             {{ $slot }}
-        </x-layouts.wrappers.content>
+        </x-layouts.wrappers.section>
     </x-layouts.wrappers.layout>
 </body>
 
