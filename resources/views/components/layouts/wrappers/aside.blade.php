@@ -82,7 +82,7 @@
 
     x-show="state.visible"
 
-    class="flex flex-col bg-zinc-950 w-full h-screen max-w-[88vw] fixed left-0 top-0 overflow-y-auto lg:relative"
+    class="flex flex-col w-full h-screen max-w-[88vw] fixed left-0 top-0 z-40 overflow-y-auto lg:relative"
     :class="{
         'sm:max-w-[300px]': !state.miniMode,
         'sm:max-w-[100px]': state.miniMode,
