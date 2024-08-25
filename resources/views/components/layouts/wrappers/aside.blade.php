@@ -7,6 +7,14 @@
     x-on:mobile_on.window="mobileModeOn"
     x-on:mobile_off.window="mobileModeOff"
 
+    x-transition:enter="duration-300 ease-in-out"
+    x-transition:enter-start="-translate-x-full"
+    x-transition:enter-end="-translate-x-0"
+
+    x-transition:leave="duration-100 ease-in"
+    x-transition:leave-start="-translate-x-0"
+    x-transition:leave-end="-translate-x-full"
+
     x-data="{
         mini: {{ $mini ? 1 : 0 }},
         inMobile: true,
@@ -82,7 +90,7 @@
 
     x-show="state.visible"
 
-    class="flex flex-col w-full h-screen max-w-[88vw] fixed left-0 top-0 z-40 overflow-y-auto lg:relative"
+    class="flex flex-col w-full h-screen max-w-[88vw] fixed left-0 top-0 z-40 overflow-y-auto lg:relative duration-200 ease-linear overflow-clip"
     :class="{
         'sm:max-w-[300px]': !state.miniMode,
         'sm:max-w-[100px]': state.miniMode,

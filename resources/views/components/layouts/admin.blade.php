@@ -25,7 +25,7 @@
                 {{-- profile --}}
                 <div class="flex justify-center items-center gap-4 bg-zinc-900 px-5 py-3 rounded-md cursor-default">
                     <x-avatar image="https://aj.dev.br/assets/images/aj.jpg" />
-                    <div x-show="!asideInMiniMode" class="duration-200">
+                    <div x-show="!asideInMiniMode" class="truncate">
                         <div class="font-semibold text-lg">Ernandes R Souza</div>
                         <div class="text-base text-zinc-500">mail@mail.com</div>
                     </div>
