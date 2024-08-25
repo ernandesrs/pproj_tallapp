@@ -12,8 +12,20 @@
     @vite('resources/css/admin/app.css')
 </head>
 
-<body class="w-full min-h-screen flex justify-center items-center p-6">
-    {{ $slot }}
+<body class="">
+    <x-layouts.wrappers.layout>
+        <x-layouts.wrappers.aside>
+            Aside
+        </x-layouts.wrappers.aside>
+
+        <x-layouts.wrappers.content>
+            <x-slot name="header">
+                HEADER
+            </x-slot>
+
+            {{ $slot }}
+        </x-layouts.wrappers.content>
+    </x-layouts.wrappers.layout>
 </body>
 
 </html>
