@@ -1,12 +1,15 @@
 <div
 
     x-on:resize.window="windowResize"
+    x-on:aside_mini_on.window="asideInMiniMode=true"
+    x-on:aside_mini_off.window="asideInMiniMode=false"
 
     x-data="{
         DESKTOP_MIN_WIDTH: 1024, // Tailwind CSS Breakpoint
 
         inMobile: true,
         windowWidth: window.innerWidth,
+        asideInMiniMode: false,
 
         init() {
             $nextTick(() => {

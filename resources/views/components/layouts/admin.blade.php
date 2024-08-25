@@ -15,7 +15,23 @@
 <body class="">
     <x-layouts.wrappers.layout>
         <x-layouts.wrappers.aside mini>
-            Aside
+
+            <div class="bg-zinc-950 w-full h-full text-zinc-300"
+                :class="{
+                    'px-3 py-3': asideInMiniMode,
+                    'px-6 py-4': !asideInMiniMode,
+                }">
+
+                {{-- profile --}}
+                <div class="flex justify-center items-center gap-4 bg-zinc-900 px-5 py-3 rounded-md cursor-default">
+                    <x-avatar image="https://aj.dev.br/assets/images/aj.jpg" />
+                    <div x-show="!asideInMiniMode" class="duration-200">
+                        <div class="font-semibold text-lg">Ernandes R Souza</div>
+                        <div class="text-base text-zinc-500">mail@mail.com</div>
+                    </div>
+                </div>
+            </div>
+
         </x-layouts.wrappers.aside>
 
         <x-layouts.wrappers.section>
