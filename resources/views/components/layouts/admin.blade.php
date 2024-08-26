@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>{{ $seo?->title ?? 'Page Title' }} | {{ config('app.name') }} Admin</title>
-    <x-layouts.includes.seo :seo="$seo ?? null" />
+    <x-layouts.partials.seo :seo="$seo ?? null" />
 
     <tallstackui:script />
     @vite('resources/css/admin/app.css')
