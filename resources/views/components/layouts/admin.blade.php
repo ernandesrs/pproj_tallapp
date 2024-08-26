@@ -24,10 +24,10 @@
 
                 {{-- profile --}}
                 <div class="flex justify-center items-center gap-4 bg-zinc-900 px-5 py-3 rounded-md cursor-default">
-                    <x-avatar image="https://aj.dev.br/assets/images/aj.jpg" />
+                    <x-avatar image="https://aj.dev.br/assets/images/aj.jpg" text="ES" md />
                     <div x-show="!asideInMiniMode" class="truncate">
-                        <div class="font-semibold text-lg">Ernandes R Souza</div>
-                        <div class="text-base text-zinc-500">mail@mail.com</div>
+                        <div class="font-semibold text-base">Ernandes R Souza</div>
+                        <div class="text-sm text-zinc-500">mail@mail.com</div>
                     </div>
                 </div>
             </div>
@@ -36,10 +36,12 @@
 
         <x-layouts.wrappers.section>
             <x-slot name="header">
-                HEADER
+                <div class="w-full h-[60px]"></div>
             </x-slot>
 
-            {{ $slot }}
+            <div class="px-5 py-6">
+                {{ $slot }}
+            </div>
         </x-layouts.wrappers.section>
     </x-layouts.wrappers.layout>
 </body>
