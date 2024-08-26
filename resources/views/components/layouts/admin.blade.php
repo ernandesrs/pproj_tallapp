@@ -29,7 +29,8 @@
                 }">
 
                 {{-- profile --}}
-                <div class="flex justify-center items-center gap-4 bg-zinc-800 dark:bg-zinc-900 px-5 py-3 rounded-md cursor-default">
+                <div
+                    class="flex justify-center items-center gap-4 bg-zinc-800 dark:bg-zinc-900 px-5 py-3 rounded-md cursor-default">
                     <x-avatar :model="\Auth::user()" property="first_name" md />
                     <div x-show="!asideMiniOn" class="truncate">
                         <div class="font-semibold text-base">
@@ -40,6 +41,16 @@
                         </div>
                     </div>
                 </div>
+
+                <x-layouts.partials.admin.sidebar-section
+                    title="Dashboard">
+                    CONTENT
+                </x-layouts.partials.admin.sidebar-section>
+
+                <x-layouts.partials.admin.sidebar-section
+                    title="Others">
+                    CONTENT
+                </x-layouts.partials.admin.sidebar-section>
 
             </div>
 
