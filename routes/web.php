@@ -35,7 +35,7 @@ Route::group([
 
 Route::group([
     'prefix' => 'admin',
-    'middleware' => 'auth'
+    'middleware' => ['auth', 'admin_access']
 ], function () {
 
     Route::get('/', \App\Livewire\Admin\Overview::class)->name('admin.overview');
