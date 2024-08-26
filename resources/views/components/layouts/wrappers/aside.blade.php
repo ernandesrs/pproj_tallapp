@@ -1,3 +1,20 @@
+{{--
+
+    Description: aside wrapper.
+
+    Dispatch events:
+    - aside_mini_on
+    - aside_mini_off
+    - aside_visible
+    - aside_invisible
+
+    Wait for events:
+    - toggle_aside
+    - mobile_on
+    - mobile_off
+
+--}}
+
 @props([
     'mini' => false,
 ])

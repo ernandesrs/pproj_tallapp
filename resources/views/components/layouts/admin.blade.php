@@ -18,14 +18,14 @@
 
             <div class="bg-zinc-950 w-full h-full text-zinc-300"
                 :class="{
-                    'px-3 py-3': asideInMiniMode,
-                    'px-6 py-4': !asideInMiniMode,
+                    'px-3 py-3': asideMiniOn,
+                    'px-6 py-4': !asideMiniOn,
                 }">
 
                 {{-- profile --}}
                 <div class="flex justify-center items-center gap-4 bg-zinc-900 px-5 py-3 rounded-md cursor-default">
                     <x-avatar image="https://aj.dev.br/assets/images/aj.jpg" text="ES" md />
-                    <div x-show="!asideInMiniMode" class="truncate">
+                    <div x-show="!asideMiniOn" class="truncate">
                         <div class="font-semibold text-base">Ernandes R Souza</div>
                         <div class="text-sm text-zinc-500">mail@mail.com</div>
                     </div>
@@ -34,12 +34,70 @@
 
         </x-layouts.wrappers.aside>
 
-        <x-layouts.wrappers.section>
+        <x-layouts.wrappers.section header-height="60">
             <x-slot name="header">
-                <div class="w-full h-[60px]"></div>
+                <div class="flex w-full px-5">
+
+                    {{-- aside toggler --}}
+                    <x-layouts.wrappers.aside-toggler class="ml-auto" />
+                </div>
             </x-slot>
 
-            <div class="px-5 py-6">
+            <div class="px-5 py-6 bg-zinc-100 flex-1">
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
+                <h1>Lorem, ipsum dolor.</h1>
                 {{ $slot }}
             </div>
         </x-layouts.wrappers.section>

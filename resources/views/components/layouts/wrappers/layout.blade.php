@@ -1,15 +1,31 @@
+{{--
+
+    Description: layout wrapper.
+
+    Dispatch events:
+    - mobile_on
+    - mobile_off
+
+    Wait for events:
+    - resize
+    - aside_mini_on
+    - aside_mini_off
+
+--}}
+
 <div
 
     x-on:resize.window="windowResize"
-    x-on:aside_mini_on.window="asideInMiniMode=true"
-    x-on:aside_mini_off.window="asideInMiniMode=false"
+    x-on:aside_mini_on.window="asideMiniOn=true"
+    x-on:aside_mini_off.window="asideMiniOn=false"
 
     x-data="{
         DESKTOP_MIN_WIDTH: 1024, // Tailwind CSS Breakpoint
 
-        inMobile: true,
         windowWidth: window.innerWidth,
-        asideInMiniMode: false,
+
+        inMobile: true,
+        asideMiniOn: false,
 
         init() {
             $nextTick(() => {

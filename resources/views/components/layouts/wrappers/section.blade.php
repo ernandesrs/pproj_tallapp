@@ -1,30 +1,32 @@
-<div class="flex-1 flex flex-col">
+{{--
+
+    Description: section wrapper. This component wraps the header and main.
+
+    Dispatch events:
+
+    Wait for events:
+
+--}}
+
+@props([
+    'headerHeight' => 60,
+])
+
+@php
+    throw_if(!is_numeric($headerHeight), 'headerHeight prop value requires a number');
+@endphp
+
+<div class="flex-1 h-full overflow-y-auto flex flex-col">
 
     {{-- main header --}}
     @isset($header)
-        <header class="flex items-center">
+        <header class="flex items-center" style="height: {{ $headerHeight }}px">
             {{ $header }}
-
-            {{-- menu toggler wrapper --}}
-            <div
-                x-data=""
-                x-on:click="$dispatch('toggle_aside')"
-                class="cursor-pointer ml-auto" role="button">
-                <div class="pointer-events-none">
-                    @isset($asideToggler)
-                        {{ $asideToggler }}
-                    @else
-                        <div class="px-3 py-1 text-2xl rounded-md">
-                            &equiv;
-                        </div>
-                    @endisset
-                </div>
-            </div>
         </header>
     @endisset
 
     {{-- main content --}}
-    <main class="flex-1 flex flex-col">
+    <main class="flex flex-col overflow-y-auto" style="height: calc(100vh - {{ $headerHeight }}px)">
         {{ $slot }}
     </main>
 </div>
