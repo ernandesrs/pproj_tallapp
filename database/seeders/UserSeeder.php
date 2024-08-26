@@ -21,6 +21,14 @@ class UserSeeder extends Seeder
             'email' => 'super@mail.com',
         ]);
 
+        \App\Models\User::factory()->create([
+            'first_name' => 'Admin',
+            'last_name' => 'User',
+            'username' => 'adminuser',
+            'gender' => 'm',
+            'email' => 'admin@mail.com',
+        ]);
+
         \App\Models\User::factory(10)->create();
     }
 }

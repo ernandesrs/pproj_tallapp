@@ -12,11 +12,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        // Seed users
+        (new \Database\Seeders\UserSeeder)->run();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // Seed roles and permissions
+        (new \Database\Seeders\RolesAndPermissionsSeeder)->run();
+
+        // Assing role to admin and super user
+        \App\Models\User::where('id', 1)->firstOrFail()->assignRole(\App\Enums\Roles\RoleEnum::SUPER);
+        \App\Models\User::where('id', 2)->firstOrFail()->assignRole(\App\Enums\Roles\RoleEnum::ADMIN);
     }
 }
