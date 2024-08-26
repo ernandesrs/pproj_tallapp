@@ -1,5 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html
+    lang="{{ str_replace('_', '-', app()->getLocale()) }}"
+    x-data="tallstackui_darkTheme()"
+    x-bind:class="{
+        'dark bg-zinc-900 text-zinc-300': darkTheme,
+        'bg-zinc-200 text-zinc-700': !darkTheme
+    }">
 
 <head>
     <meta charset="utf-8">
@@ -16,14 +22,14 @@
     <x-layouts.wrappers.layout>
         <x-layouts.wrappers.aside mini>
 
-            <div class="bg-zinc-950 w-full h-screen overflow-y-auto text-zinc-300"
+            <div class="bg-zinc-900 dark:bg-zinc-950 w-full h-screen overflow-y-auto text-zinc-300"
                 :class="{
                     'px-3 py-3': asideMiniOn,
                     'px-6 py-4': !asideMiniOn,
                 }">
 
                 {{-- profile --}}
-                <div class="flex justify-center items-center gap-4 bg-zinc-900 px-5 py-3 rounded-md cursor-default">
+                <div class="flex justify-center items-center gap-4 bg-zinc-800 dark:bg-zinc-900 px-5 py-3 rounded-md cursor-default">
                     <x-avatar :model="\Auth::user()" property="first_name" md />
                     <div x-show="!asideMiniOn" class="truncate">
                         <div class="font-semibold text-base">
@@ -41,14 +47,19 @@
 
         <x-layouts.wrappers.section header-height="60">
             <x-slot name="header">
-                <div class="flex w-full px-5">
+                <div class="flex items-center w-full h-full px-5">
 
-                    {{-- aside toggler --}}
-                    <x-layouts.wrappers.aside-toggler class="ml-auto" />
+                    <div class="flex gap-x-6 items-center ml-auto">
+                        {{-- theme toggler --}}
+                        <x-theme-switch md />
+
+                        {{-- aside toggler --}}
+                        <x-layouts.wrappers.aside-toggler />
+                    </div>
                 </div>
             </x-slot>
 
-            <div class="px-5 py-6 bg-zinc-100 flex-1">
+            <div class="px-5 py-6 flex-1">
                 {{ $slot }}
             </div>
         </x-layouts.wrappers.section>
