@@ -1,0 +1,21 @@
+/* Estilos globais para o scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Estilos para a trilha */
+::-webkit-scrollbar-track {
+    @apply bg-zinc-200 ;
+    /* border-radius: 10px; */
+}
+
+/* Estilos para o thumb */
+::-webkit-scrollbar-thumb {
+    @apply bg-indigo-600
+    /* border-radius: 10px; */
+}
+
+/* Estilos para quando o mouse está sobre o thumb */
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-indigo-700
+}
