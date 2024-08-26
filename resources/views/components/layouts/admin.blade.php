@@ -60,11 +60,15 @@
                             'icon' => 'people-fill',
                             'text' => 'Usuários',
                             'permissions' => [\App\Enums\Roles\Permissions\UserPermissionsEnum::VIEW_ANY],
+                            'route' => ['name' => 'admin.users.index'],
+                            'activeIn' => ['admin.users.index'],
                         ],
                         [
                             'icon' => 'shield-fill',
                             'text' => 'Cargos',
                             'permissions' => [\App\Enums\Roles\Permissions\RolePermissionsEnum::VIEW_ANY],
+                            'route' => ['name' => 'admin.roles.index'],
+                            'activeIn' => ['admin.roles.index'],
                         ],
                         [
                             'icon' => 'arrow-down',

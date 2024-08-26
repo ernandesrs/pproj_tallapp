@@ -39,5 +39,8 @@ Route::group([
 ], function () {
 
     Route::get('/', \App\Livewire\Admin\Overview::class)->name('admin.overview');
+    Route::get('/users', \App\Livewire\Admin\Users\Index::class)->name('admin.users.index');
+
+    Route::get('/roles', \App\Livewire\Admin\Roles\Index::class)->name('admin.roles.index');
 
 });
