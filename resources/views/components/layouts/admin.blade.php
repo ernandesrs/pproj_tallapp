@@ -16,7 +16,7 @@
     <x-layouts.wrappers.layout>
         <x-layouts.wrappers.aside mini>
 
-            <div class="bg-zinc-950 w-full h-full text-zinc-300"
+            <div class="bg-zinc-950 w-full h-screen overflow-y-auto text-zinc-300"
                 :class="{
                     'px-3 py-3': asideMiniOn,
                     'px-6 py-4': !asideMiniOn,
@@ -30,6 +30,7 @@
                         <div class="text-sm text-zinc-500">mail@mail.com</div>
                     </div>
                 </div>
+
             </div>
 
         </x-layouts.wrappers.aside>
@@ -44,60 +45,6 @@
             </x-slot>
 
             <div class="px-5 py-6 bg-zinc-100 flex-1">
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
-                <h1>Lorem, ipsum dolor.</h1>
                 {{ $slot }}
             </div>
         </x-layouts.wrappers.section>
