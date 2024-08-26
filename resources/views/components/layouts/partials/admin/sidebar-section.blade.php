@@ -4,7 +4,7 @@
 
 <div class="my-4 cursor-default">
     @if (!empty($title))
-        <div class="mb-2 text-sm text-zinc-500">
+        <div class="mb-2 text-sm text-zinc-500 truncate">
             {{ $title }}
         </div>
     @endif

@@ -1,5 +1,5 @@
 @props([
-    'name' => 'app',
+    'name' => '',
 ])
 
-<i class="bi bi-{{ $name }}" {{ $attributes }}></i>
+<i class="bi bi-{{ empty($name) ? 'app' : $name }}" {{ $attributes }}></i>

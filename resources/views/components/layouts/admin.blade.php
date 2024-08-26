@@ -24,27 +24,63 @@
 
             <div class="bg-zinc-900 dark:bg-zinc-950 w-full h-screen overflow-y-auto text-zinc-300"
                 :class="{
-                    'px-3 py-3': asideMiniOn,
+                    'px-3 py-4': asideMiniOn,
                     'px-6 py-4': !asideMiniOn,
                 }">
 
                 {{-- profile --}}
                 <div
-                    class="flex justify-center items-center gap-4 bg-zinc-800 dark:bg-zinc-900 px-5 py-3 rounded-md cursor-default">
+                    class="flex justify-center items-center gap-4 bg-zinc-800 dark:bg-zinc-900 px-5 py-3 rounded-md cursor-default overflow-hidden">
                     <x-avatar :model="\Auth::user()" property="first_name" md />
-                    <div x-show="!asideMiniOn" class="truncate">
-                        <div class="font-semibold text-base">
-                            {{ \Auth::user()->first_name }} {{ \Auth::user()->last_name }}
+
+                    <x-transitions.fade
+                        on-enter-only
+                        x-show="!asideMiniOn">
+                        <div x-show="!asideMiniOn" class="truncate">
+                            <div class="font-semibold text-base">
+                                {{ \Auth::user()->first_name }} {{ \Auth::user()->last_name }}
+                            </div>
+                            <div class="text-sm text-zinc-500">
+                                {{ \Auth::user()->email }}
+                            </div>
                         </div>
-                        <div class="text-sm text-zinc-500">
-                            {{ \Auth::user()->email }}
-                        </div>
-                    </div>
+                    </x-transitions.fade>
                 </div>
 
                 <x-layouts.partials.admin.sidebar-section
                     title="Dashboard">
-                    CONTENT
+                    <x-layouts.partials.admin.sidebar-nav :items="[
+                        [
+                            'icon' => 'pie-chart-fill',
+                            'text' => 'Visão geral',
+                            'route' => ['name' => 'admin.overview'],
+                            'activeIn' => ['admin.overview'],
+                        ],
+                        [
+                            'icon' => 'people-fill',
+                            'text' => 'Usuários',
+                            'permissions' => [\App\Enums\Roles\Permissions\UserPermissionsEnum::VIEW_ANY],
+                        ],
+                        [
+                            'icon' => 'shield-fill',
+                            'text' => 'Cargos',
+                            'permissions' => [\App\Enums\Roles\Permissions\RolePermissionsEnum::VIEW_ANY],
+                        ],
+                        [
+                            'icon' => 'arrow-down',
+                            'text' => 'Submenu',
+                            'items' => [
+                                [
+                                    'icon' => 'arrow-right',
+                                    'text' => 'Subitem #1',
+                                ],
+                                [
+                                    'icon' => 'arrow-right',
+                                    'text' => 'Subitem #2',
+                                ],
+                            ],
+                        ],
+                    ]" />
                 </x-layouts.partials.admin.sidebar-section>
 
                 <x-layouts.partials.admin.sidebar-section
