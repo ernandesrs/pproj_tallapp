@@ -24,10 +24,14 @@
 
                 {{-- profile --}}
                 <div class="flex justify-center items-center gap-4 bg-zinc-900 px-5 py-3 rounded-md cursor-default">
-                    <x-avatar image="https://aj.dev.br/assets/images/aj.jpg" text="ES" md />
+                    <x-avatar :model="\Auth::user()" property="first_name" md />
                     <div x-show="!asideMiniOn" class="truncate">
-                        <div class="font-semibold text-base">Ernandes R Souza</div>
-                        <div class="text-sm text-zinc-500">mail@mail.com</div>
+                        <div class="font-semibold text-base">
+                            {{ \Auth::user()->first_name }} {{ \Auth::user()->last_name }}
+                        </div>
+                        <div class="text-sm text-zinc-500">
+                            {{ \Auth::user()->email }}
+                        </div>
                     </div>
                 </div>
 

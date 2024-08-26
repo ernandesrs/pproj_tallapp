@@ -16,7 +16,26 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', \App\Livewire\Front\Home::class)->name('front.home');
 
 Route::group([
-    'prefix' => 'admin'
+    'prefix' => 'auth'
+], function () {
+
+    Route::get('/login', function () {
+        // fake login
+        $user = \App\Models\User::where('id', 1)->firstOrFail();
+        \Auth::login($user);
+        return redirect(route('admin.overview'));
+    })->name('auth.login');
+
+    Route::get('/logout', function () {
+        \Auth::logout();
+        return redirect(route('front.home'));
+    })->name('auth.logout');
+
+});
+
+Route::group([
+    'prefix' => 'admin',
+    'middleware' => 'auth'
 ], function () {
 
     Route::get('/', \App\Livewire\Admin\Overview::class)->name('admin.overview');

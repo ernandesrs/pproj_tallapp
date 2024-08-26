@@ -1,21 +1,25 @@
 <div class="border border-zinc-800 p-6">
 
     <div class="flex-1 flex flex-wrap justify-center items-start gap-5">
-        <x-front.clickable>
-            Login
-        </x-front.clickable>
+        @guest
+            <x-front.clickable href="{{ route('auth.login') }}">
+                Login
+            </x-front.clickable>
+            <x-front.clickable>
+                Register
+            </x-front.clickable>
+        @else
+            <x-front.clickable href="{{ route('admin.overview') }}">
+                Administrative
+            </x-front.clickable>
 
-        <x-front.clickable>
-            Register
-        </x-front.clickable>
-
-        <x-front.clickable href="{{ route('admin.overview') }}">
-            Administrative
-        </x-front.clickable>
-
-        <x-front.clickable>
-            Customer
-        </x-front.clickable>
+            <x-front.clickable>
+                Customer
+            </x-front.clickable>
+            <x-front.clickable href="{{ route('auth.logout') }}">
+                Logout
+            </x-front.clickable>
+        @endguest
     </div>
 
     <hr class="border-zinc-800 my-5">
