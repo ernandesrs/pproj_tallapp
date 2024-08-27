@@ -72,6 +72,12 @@
                             'route' => ['name' => 'admin.roles.index'],
                             'activeIn' => ['admin.roles.index'],
                         ],
+                        [
+                            'icon' => 'user-circle',
+                            'text' => 'Meu perfil',
+                            'route' => ['name' => 'account.profile'],
+                            'activeIn' => ['account.profile'],
+                        ],
                     ]" />
                 </x-layouts.partials.admin.sidebar-section>
 
