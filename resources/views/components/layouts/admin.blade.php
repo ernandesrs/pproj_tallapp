@@ -69,21 +69,7 @@
                             'permissions' => [\App\Enums\Roles\Permissions\RolePermissionsEnum::VIEW_ANY],
                             'route' => ['name' => 'admin.roles.index'],
                             'activeIn' => ['admin.roles.index'],
-                        ],
-                        [
-                            'icon' => 'arrow-down',
-                            'text' => 'Submenu',
-                            'items' => [
-                                [
-                                    'icon' => 'arrow-right',
-                                    'text' => 'Subitem #1',
-                                ],
-                                [
-                                    'icon' => 'arrow-right',
-                                    'text' => 'Subitem #2',
-                                ],
-                            ],
-                        ],
+                        ]
                     ]" />
                 </x-layouts.partials.admin.sidebar-section>
 
@@ -98,7 +84,7 @@
 
         <x-layouts.wrappers.section header-height="60">
             <x-slot name="header">
-                <div class="flex items-center w-full h-full px-5">
+                <div class="flex items-center w-full h-full px-5 shadow-sm border-b dark:border-zinc-700">
 
                     <div class="flex gap-x-6 items-center ml-auto">
                         {{-- theme toggler --}}

@@ -2,4 +2,6 @@
     'name' => '',
 ])
 
-<i class="bi bi-{{ empty($name) ? 'app' : $name }}" {{ $attributes }}></i>
+<i {{ $attributes->merge([
+    'class' => 'bi bi-' . (empty($name) ? 'app' : $name),
+]) }}></i>
