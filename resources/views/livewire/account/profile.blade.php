@@ -18,7 +18,7 @@
                     @endif
 
                     <div class="flex-1">
-                        <x-upload wire:model='avatar' label="Novo avatar" delete delete-method="deleteAvatar"
+                        <x-upload wire:model="avatar" label="Novo avatar" delete delete-method="deleteAvatar"
                             accept="image/*" />
                     </div>
                 </div>

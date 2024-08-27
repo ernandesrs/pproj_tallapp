@@ -51,7 +51,12 @@ class Profile extends Component
      */
     public function saveAvatar()
     {
-        $path = $this->avatar->store('avatars', ['disk' => 'public']);
+        $validated = $this->validate([
+            'avatar' => ['required', 'mimes:png,jpg,jpeg', 'max:1024']
+        ]);
+
+        $avatar = $validated['avatar'];
+        $path = $avatar->store('avatars', ['disk' => 'public']);
         if ($path) {
             $this->user->avatar = $path;
             $this->user->save();
