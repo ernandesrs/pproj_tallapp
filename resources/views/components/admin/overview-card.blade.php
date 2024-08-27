@@ -7,7 +7,7 @@
 <div {{ $attributes }}>
     <x-card>
         <div class="flex gap-4 items-center">
-            <x-bicon name="{{ $icon }}" class="text-5xl lg:text-6xl" />
+            <x-icon name="{{ $icon }}" />
             <div>
                 <h3 class="text-xl">
                     {{ $title }}

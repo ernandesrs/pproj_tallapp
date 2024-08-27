@@ -2,7 +2,7 @@
     title="Usuários">
 
     <x-slot:actions>
-        <x-button wire:navigate href="{{ route('admin.roles.index') }}" color="emerald" icon="add" position="left">
+        <x-button wire:navigate href="{{ route('admin.roles.index') }}" color="emerald" icon="plus" position="left">
             Novo usuário
         </x-button>
     </x-slot>

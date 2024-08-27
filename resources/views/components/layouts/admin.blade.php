@@ -51,20 +51,20 @@
                     title="Dashboard">
                     <x-layouts.partials.admin.sidebar-nav :items="[
                         [
-                            'icon' => 'pie-chart-fill',
+                            'icon' => 'chart-pie',
                             'text' => 'Visão geral',
                             'route' => ['name' => 'admin.overview'],
                             'activeIn' => ['admin.overview'],
                         ],
                         [
-                            'icon' => 'people-fill',
+                            'icon' => 'users-group',
                             'text' => 'Usuários',
                             'permissions' => [\App\Enums\Roles\Permissions\UserPermissionsEnum::VIEW_ANY],
                             'route' => ['name' => 'admin.users.index'],
                             'activeIn' => ['admin.users.index'],
                         ],
                         [
-                            'icon' => 'shield-fill',
+                            'icon' => 'shield-half',
                             'text' => 'Cargos',
                             'permissions' => [\App\Enums\Roles\Permissions\RolePermissionsEnum::VIEW_ANY],
                             'route' => ['name' => 'admin.roles.index'],

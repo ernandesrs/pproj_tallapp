@@ -58,7 +58,7 @@
         :class="{ 'justify-center': asideMiniOn }"
         {{ $attributes }}>
 
-        <x-bicon name="{{ $icon }}" />
+        <x-icon name="{{ $icon }}" />
 
         <x-transitions.fade
             on-enter-only
