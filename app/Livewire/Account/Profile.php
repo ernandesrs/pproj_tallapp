@@ -49,7 +49,7 @@ class Profile extends Component
      * Avatar uplaod
      * @return void
      */
-    public function saveAvatar()
+    public function updateAvatar()
     {
         $validated = $this->validate([
             'avatar' => ['required', 'mimes:png,jpg,jpeg', 'max:1024']

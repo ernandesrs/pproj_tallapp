@@ -25,7 +25,7 @@
 
                 @if ($this->avatar)
                     <div class="flex-1 flex justify-center">
-                        <x-button wire:click='saveAvatar' text="Atualizar" />
+                        <x-button wire:click='updateAvatar' text="Atualizar" />
                     </div>
                 @endif
             </div>
