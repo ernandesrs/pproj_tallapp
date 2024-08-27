@@ -14,6 +14,8 @@
     <title>{{ $seo?->title ?? 'Page Title' }} | {{ config('app.name') }} Admin</title>
     <x-layouts.partials.seo :seo="$seo ?? null" />
 
+    <link rel="shortcut icon" href="{{ asset('assets/admin/img/logo-light.svg') }}" type="image/x-icon">
+
     <tallstackui:script />
     @vite('resources/css/admin/app.css')
 </head>
@@ -69,7 +71,7 @@
                             'permissions' => [\App\Enums\Roles\Permissions\RolePermissionsEnum::VIEW_ANY],
                             'route' => ['name' => 'admin.roles.index'],
                             'activeIn' => ['admin.roles.index'],
-                        ]
+                        ],
                     ]" />
                 </x-layouts.partials.admin.sidebar-section>
 
