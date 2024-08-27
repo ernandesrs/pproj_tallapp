@@ -2,9 +2,11 @@
     title="Usuários">
 
     <x-slot:actions>
-        <x-button wire:navigate href="{{ route('admin.roles.index') }}" color="emerald" icon="plus" position="left">
-            Novo usuário
-        </x-button>
+        @can([\App\Enums\Roles\Permissions\UserPermissionsEnum::CREATE->value])
+            <x-button wire:navigate href="{{ route('admin.users.index') }}" color="emerald" icon="plus" position="left">
+                Novo usuário
+            </x-button>
+        @endcan
     </x-slot>
 
     <div class="col-span-12">
