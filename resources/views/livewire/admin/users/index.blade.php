@@ -10,8 +10,17 @@
     </x-slot>
 
     <div class="col-span-12">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto architecto dolores ea magni eaque quos earum
-        commodi eum! Accusamus debitis adipisci dolores deserunt itaque corrupti neque ab ullam obcaecati at.
+        <x-table :$headers :$rows filter :quantity="[5, 10, 15, 20]" paginate persistent loading>
+            @interact('column_action', $row)
+                @can(\App\Enums\Roles\Permissions\UserPermissionsEnum::UPDATE->value)
+                    <x-button text="Editar" icon="edit" color="secondary" flat sm />
+                @endcan
+                @can(\App\Enums\Roles\Permissions\UserPermissionsEnum::DELETE->value)
+                    <x-button wire:click="deleteItem({{ $row->id }})" text="Excluir" icon="trash" color="rose" flat
+                        sm />
+                @endcan
+            @endinteract
+        </x-table>
     </div>
 
 </x-admin.page>
