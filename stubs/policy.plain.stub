@@ -1,0 +1,25 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ namespacedUserModel }};
+
+class {{ class }} extends BasePolicy
+{
+    /**
+     * Create a new policy instance.
+     */
+    public function __construct()
+    {
+        //
+    }
+
+    /**
+     * Permissions enum class
+     * @return string
+     */
+    static function permissionsEnumClass()
+    {
+        // return here a permissions enum class to this model
+    }
+}
