@@ -7,7 +7,7 @@
             title="Seu avatar"
             class="col-span-12">
             <div class="flex flex-col gap-y-3">
-                <div class="flex-1 flex gap-5">
+                <div class="flex-1 flex items-center gap-5">
                     @if (!empty($user->avatar))
                         <x-avatar
                             :image="\Str::startsWith($user->avatar, ['http://', 'https://'])
@@ -18,16 +18,16 @@
                     @endif
 
                     <div class="flex-1">
-                        <x-upload wire:model="avatar" label="Novo avatar" delete delete-method="deleteAvatar"
-                            accept="image/*" />
+                        <x-upload wire:model="avatar" delete delete-method="deleteAvatar"
+                            accept="image/*" placeholder="Novo avatar" tip="Arraste e solte sua foto aqui">
+                            <x-slot:footer when-uploaded>
+                                <div class="w-full flex justify-center">
+                                    <x-button wire:target="updateAvatar" wire:click='updateAvatar' text="Atualizar" />
+                                </div>
+                            </x-slot:footer>
+                        </x-upload>
                     </div>
                 </div>
-
-                @if ($this->avatar)
-                    <div class="flex-1 flex justify-center">
-                        <x-button wire:click='updateAvatar' text="Atualizar" />
-                    </div>
-                @endif
             </div>
         </x-admin.content-card>
 
@@ -78,7 +78,8 @@
                 </div>
 
                 <div class="col-span-12 flex justify-center">
-                    <x-button wire:click="updateProfile" text="Atualizar" icon="check" loading />
+                    <x-button wire:target="updateProfile" wire:click="updateProfile" text="Atualizar" icon="check"
+                        loading />
                 </div>
             </div>
         </x-admin.content-card>
