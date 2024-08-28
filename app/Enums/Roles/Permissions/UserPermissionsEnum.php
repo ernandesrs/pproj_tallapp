@@ -19,7 +19,11 @@ enum UserPermissionsEnum: string
 
     case DELETE = 'delete_user';
 
+    case FORCE_DELETE = 'force_delete_user';
+
     case DELETE_MANY = 'delete_many_users';
+
+    case RESTORE = 'restore_user';
 
     case EDIT_ROLE = 'edit_user_roles';
 
