@@ -74,6 +74,9 @@ class Profile extends Component
     public function updateProfile()
     {
         $validated = $this->validate(UserRules::updateRules($this->user));
+        if (key_exists('password', $validated) && empty($validated['password'])) {
+            unset($validated['password']);
+        }
 
         $this->user->update($validated);
 

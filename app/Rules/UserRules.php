@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Rules;
-use App\Rules\Interfaces\RulesInterface;
+use App\Interfaces\RulesInterface;
 
 class UserRules implements RulesInterface
 {
