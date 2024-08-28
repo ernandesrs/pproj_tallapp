@@ -5,10 +5,11 @@ namespace App\Livewire\Account;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Http\UploadedFile;
+use TallStackUi\Traits\Interactions;
 
 class Profile extends Component
 {
-    use WithFileUploads;
+    use WithFileUploads, Interactions;
 
     /**
      * Auth user instance
@@ -67,6 +68,10 @@ class Profile extends Component
         ]);
 
         $this->user->update($validated['data']);
+
+        $this->toast()
+            ->success('Atualizado!', 'Dados de perfil atualizados com sucesso!')
+            ->send();
     }
 
     /**
@@ -85,6 +90,10 @@ class Profile extends Component
             $this->user->avatar = $path;
             $this->user->save();
         }
+
+        $this->toast()
+            ->success('Atualizada!', 'Sua foto foi atualizada com sucesso!')
+            ->send();
     }
 
     /**
