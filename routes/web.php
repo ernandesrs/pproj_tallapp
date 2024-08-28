@@ -36,7 +36,8 @@ Route::group([
 });
 
 Route::group([
-    'prefix' => 'account'
+    'prefix' => 'account',
+    'middleware' => ['auth']
 ], function () {
 
     Route::get('/', \App\Livewire\Account\Profile::class)->name('account.profile');

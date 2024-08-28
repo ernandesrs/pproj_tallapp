@@ -23,12 +23,19 @@ class Profile extends Component
     public null|\Livewire\Features\SupportFileUploads\TemporaryUploadedFile $avatar = null;
 
     /**
+     * Profile data
+     * @var array
+     */
+    public array $data = [];
+
+    /**
      * Mount
      * @return void
      */
     public function mount()
     {
         $this->user = \Auth::user();
+        $this->data = $this->user->toArray();
     }
 
     /**
@@ -43,6 +50,23 @@ class Profile extends Component
                     'title' => 'Meu perfil'
                 ]
             ]);
+    }
+
+    /**
+     * Update profile data
+     * @return void
+     */
+    public function updateProfile()
+    {
+        $validated = $this->validate([
+            'data.first_name' => ['required', 'string', 'max:25'],
+            'data.last_name' => ['required', 'string', 'max:50'],
+            'data.username' => ['required', 'string', 'max:25', 'unique:users,username,' . $this->user->id],
+            'data.gender' => ['required', 'string', \Illuminate\Validation\Rule::in(['n', 'f', 'm'])],
+            'data.password' => ['nullable', 'string', 'confirmed'],
+        ]);
+
+        $this->user->update($validated['data']);
     }
 
     /**

@@ -44,11 +44,43 @@
             icon="id"
             title="Profile data"
             class="col-span-12">
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi rerum laborum saepe cum consequuntur
-                eligendi accusamus perferendis explicabo commodi non quibusdam maiores, nobis, mollitia expedita ipsa
-                dolorem ut dolores quae?
-            </p>
+
+            <div class="grid grid-cols-12 gap-6">
+                <div class="col-span-12 sm:col-span-6">
+                    <x-input wire:model='data.first_name' label="Nome *" />
+                </div>
+
+                <div class="col-span-12 sm:col-span-6">
+                    <x-input wire:model='data.last_name' label="Sobrenome *" />
+                </div>
+
+                <div class="col-span-12 sm:col-span-6">
+                    <x-input wire:model='data.username' label="Usuário *" />
+                </div>
+
+                <div class="col-span-12 sm:col-span-6">
+                    <x-select.styled
+                        wire:model='data.gender'
+                        :options="[
+                            ['label' => 'Não definir', 'value' => 'n'],
+                            ['label' => 'Feminino', 'value' => 'f'],
+                            ['label' => 'Masculino', 'value' => 'm'],
+                        ]" select="label:label|value:value" label="Gênero *"
+                        placeholder='Selecione' />
+                </div>
+
+                <div class="col-span-12 sm:col-span-6">
+                    <x-password wire:model='data.password' label="Senha" />
+                </div>
+
+                <div class="col-span-12 sm:col-span-6">
+                    <x-password wire:model='data.password_confirmation' label="Confirmar senha" />
+                </div>
+
+                <div class="col-span-12 flex justify-center">
+                    <x-button wire:click="updateProfile" text="Atualizar" icon="check" loading />
+                </div>
+            </div>
         </x-admin.content-card>
     </div>
 
