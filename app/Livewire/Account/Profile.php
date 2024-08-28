@@ -3,6 +3,7 @@
 namespace App\Livewire\Account;
 
 use App\Rules\UserRules;
+use App\Services\UserService;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -73,12 +74,7 @@ class Profile extends Component
      */
     public function updateProfile()
     {
-        $validated = $this->validate(UserRules::updateRules($this->user));
-        if (key_exists('password', $validated) && empty($validated['password'])) {
-            unset($validated['password']);
-        }
-
-        $this->user->update($validated);
+        UserService::update($this->validate(UserService::rules()::updateRules($this->user)), $this->user, []);
 
         $this->toast()
             ->success('Atualizado!', 'Dados de perfil atualizados com sucesso!')
@@ -91,14 +87,7 @@ class Profile extends Component
      */
     public function updateAvatar()
     {
-        $validated = $this->validate(UserRules::avatarUpdateRules());
-
-        $avatar = $validated['avatar'];
-        $path = $avatar->store('avatars', ['disk' => 'public']);
-        if ($path) {
-            $this->user->avatar = $path;
-            $this->user->save();
-        }
+        UserService::updateAvatar($this->validate(UserService::rules()::avatarUpdateRules()), $this->user);
 
         $this->toast()
             ->success('Atualizada!', 'Sua foto foi atualizada com sucesso!')
