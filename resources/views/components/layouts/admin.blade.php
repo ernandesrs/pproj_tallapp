@@ -50,11 +50,11 @@
                     <x-transitions.fade
                         on-enter-only
                         x-show="!asideMiniOn">
-                        <div x-show="!asideMiniOn" class="truncate">
-                            <div class="font-semibold text-base">
+                        <div x-show="!asideMiniOn" class="w-full max-w-[50vw] sm:max-w-[125px] flex flex-col">
+                            <div class="font-semibold text-base truncate">
                                 {{ $logged->first_name }} {{ $logged->last_name }}
                             </div>
-                            <div class="text-sm text-zinc-500">
+                            <div class="text-sm text-zinc-500 truncate">
                                 {{ $logged->email }}
                             </div>
                         </div>
