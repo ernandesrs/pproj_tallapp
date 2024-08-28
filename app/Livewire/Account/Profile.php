@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Account;
 
-use App\Rules\UserRules;
 use App\Services\UserService;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
