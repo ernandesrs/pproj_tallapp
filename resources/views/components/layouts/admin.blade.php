@@ -31,19 +31,29 @@
                 }">
 
                 {{-- profile --}}
+                @php
+                    $logged = \Auth::user();
+                @endphp
                 <div
                     class="flex justify-center items-center gap-4 bg-zinc-800 dark:bg-zinc-900 px-5 py-3 rounded-md cursor-default overflow-hidden">
-                    <x-avatar :model="\Auth::user()" property="first_name" md />
+                    @if (!empty($logged->avatar))
+                        <x-avatar
+                            :image="\Str::startsWith($logged->avatar, ['http://', 'https://'])
+                                ? $logged->avatar
+                                : \Storage::url($logged->avatar)" md />
+                    @else
+                        <x-avatar text="{{ $logged->username[0] }}" md />
+                    @endif
 
                     <x-transitions.fade
                         on-enter-only
                         x-show="!asideMiniOn">
                         <div x-show="!asideMiniOn" class="truncate">
                             <div class="font-semibold text-base">
-                                {{ \Auth::user()->first_name }} {{ \Auth::user()->last_name }}
+                                {{ $logged->first_name }} {{ $logged->last_name }}
                             </div>
                             <div class="text-sm text-zinc-500">
-                                {{ \Auth::user()->email }}
+                                {{ $logged->email }}
                             </div>
                         </div>
                     </x-transitions.fade>

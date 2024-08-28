@@ -8,13 +8,13 @@
             class="col-span-12">
             <div class="flex flex-col gap-y-3">
                 <div class="flex-1 flex gap-5">
-                    @if (!empty(\Auth::user()->avatar))
+                    @if (!empty($user->avatar))
                         <x-avatar
-                            :image="\Str::startsWith(\Auth::user()->avatar, ['http://', 'https://'])
-                                ? \Auth::user()->avatar
-                                : \Storage::url(\Auth::user()->avatar)" lg />
+                            :image="\Str::startsWith($user->avatar, ['http://', 'https://'])
+                                ? $user->avatar
+                                : \Storage::url($user->avatar)" lg />
                     @else
-                        <x-avatar text="{{ \Auth::user()->username[0] }}" lg />
+                        <x-avatar text="{{ $user->username[0] }}" lg />
                     @endif
 
                     <div class="flex-1">
