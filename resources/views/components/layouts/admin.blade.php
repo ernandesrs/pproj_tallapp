@@ -22,8 +22,10 @@
 
 <body class="">
 
+    <x-toast />
+    <x-dialog />
+
     <x-layouts.wrappers.layout>
-        <x-toast />
         <x-layouts.wrappers.aside mini>
 
             <div class="bg-zinc-900 dark:bg-zinc-950 w-full h-screen overflow-y-auto text-zinc-300"

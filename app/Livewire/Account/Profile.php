@@ -81,6 +81,50 @@ class Profile extends Component
     }
 
     /**
+     * Delete account: show dialog confirmation
+     * @return void
+     */
+    public function deleteAccount()
+    {
+        $this->dialog()
+            ->warning('Quer realmente excluir sua conta?')
+            ->confirm('Sim, quero', 'deletionConfirmed')
+            ->cancel('Cancelar')
+            ->send();
+    }
+
+    /**
+     * Finalyy delete user account
+     * @return void
+     */
+    public function deletionConfirmed()
+    {
+        if (!UserService::delete($this->user)) {
+            $this->toast()->error('Houve um erro ao tentar excluir conta!')->send();
+            return;
+        }
+
+        $this->dialog()
+            ->warning('Inativada!', 'Sua conta foi inativada, você tem X dias para tentar recuperá-la, após isso ela será permanentemente excluída.')
+            ->hook([
+                'ok' => [
+                    'method' => 'deletionConfirmedRedirect',
+                    'params' => []
+                ]
+            ])
+            ->send();
+    }
+
+    /**
+     * Redirect user after account deletion
+     * @return void
+     */
+    public function deletionConfirmedRedirect()
+    {
+        return $this->redirect(route('front.home'));
+    }
+
+    /**
      * Avatar uplaod
      * @return void
      */
