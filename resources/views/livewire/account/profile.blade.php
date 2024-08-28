@@ -47,20 +47,20 @@
 
             <div class="grid grid-cols-12 gap-6">
                 <div class="col-span-12 sm:col-span-6">
-                    <x-input wire:model='data.first_name' label="Nome *" />
+                    <x-input wire:model='first_name' label="Nome *" />
                 </div>
 
                 <div class="col-span-12 sm:col-span-6">
-                    <x-input wire:model='data.last_name' label="Sobrenome *" />
+                    <x-input wire:model='last_name' label="Sobrenome *" />
                 </div>
 
                 <div class="col-span-12 sm:col-span-6">
-                    <x-input wire:model='data.username' label="Usuário *" />
+                    <x-input wire:model='username' label="Usuário *" />
                 </div>
 
                 <div class="col-span-12 sm:col-span-6">
                     <x-select.styled
-                        wire:model='data.gender'
+                        wire:model='gender'
                         :options="[
                             ['label' => 'Não definir', 'value' => 'n'],
                             ['label' => 'Feminino', 'value' => 'f'],
@@ -70,11 +70,11 @@
                 </div>
 
                 <div class="col-span-12 sm:col-span-6">
-                    <x-password wire:model='data.password' label="Senha" />
+                    <x-password wire:model='password' label="Senha" />
                 </div>
 
                 <div class="col-span-12 sm:col-span-6">
-                    <x-password wire:model='data.password_confirmation' label="Confirmar senha" />
+                    <x-password wire:model='password_confirmation' label="Confirmar senha" />
                 </div>
 
                 <div class="col-span-12 flex justify-center">

@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Account;
 
+use App\Rules\UserRules;
+use Livewire\Attributes\Locked;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Http\UploadedFile;
@@ -15,6 +17,7 @@ class Profile extends Component
      * Auth user instance
      * @var \App\Models\User
      */
+    #[Locked]
     public \App\Models\User $user;
 
     /**
@@ -23,11 +26,17 @@ class Profile extends Component
      */
     public null|\Livewire\Features\SupportFileUploads\TemporaryUploadedFile $avatar = null;
 
-    /**
-     * Profile data
-     * @var array
-     */
-    public array $data = [];
+    public string $first_name = '';
+
+    public string $last_name = '';
+
+    public string $username = '';
+
+    public string $gender = '';
+
+    public ?string $password = null;
+
+    public ?string $password_confirmation = null;
 
     /**
      * Mount
@@ -36,7 +45,12 @@ class Profile extends Component
     public function mount()
     {
         $this->user = \Auth::user();
-        $this->data = $this->user->toArray();
+        $this->fill($this->user->only([
+            'first_name',
+            'last_name',
+            'username',
+            'gender'
+        ]));
     }
 
     /**
@@ -59,15 +73,9 @@ class Profile extends Component
      */
     public function updateProfile()
     {
-        $validated = $this->validate([
-            'data.first_name' => ['required', 'string', 'max:25'],
-            'data.last_name' => ['required', 'string', 'max:50'],
-            'data.username' => ['required', 'string', 'max:25', 'unique:users,username,' . $this->user->id],
-            'data.gender' => ['required', 'string', \Illuminate\Validation\Rule::in(['n', 'f', 'm'])],
-            'data.password' => ['nullable', 'string', 'confirmed'],
-        ]);
+        $validated = $this->validate(UserRules::updateRules($this->user));
 
-        $this->user->update($validated['data']);
+        $this->user->update($validated);
 
         $this->toast()
             ->success('Atualizado!', 'Dados de perfil atualizados com sucesso!')
@@ -80,9 +88,7 @@ class Profile extends Component
      */
     public function updateAvatar()
     {
-        $validated = $this->validate([
-            'avatar' => ['required', 'mimes:png,jpg,jpeg', 'max:1024']
-        ]);
+        $validated = $this->validate(UserRules::avatarUpdateRules());
 
         $avatar = $validated['avatar'];
         $path = $avatar->store('avatars', ['disk' => 'public']);
