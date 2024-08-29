@@ -77,4 +77,32 @@ class Edit extends Component
             ->info('Atualizado!', 'Os dados de perfil do usuário foram atualizados!')
             ->send();
     }
+
+    /**
+     * Delete avatar confirmation
+     * @return void
+     */
+    public function deleteAvatar()
+    {
+        $this->dialog()
+            ->warning('Tem certeza?', 'Confirme a exclusão do avatar deste usuário.')
+            ->cancel('Cancelar')
+            ->confirm('Excluir avatar', 'deleteAvatarConfirmed')
+            ->send();
+    }
+
+    /**
+     * Delete avatar after confirmation
+     * @return void
+     */
+    public function deleteAvatarConfirmed()
+    {
+        $this->authorize('update', $this->user);
+
+        UserService::deleteAvatar($this->user);
+
+        $this->toast()
+            ->info('Pronto!', 'Avatar excluído com sucesso')
+            ->send();
+    }
 }
