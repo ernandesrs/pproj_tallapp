@@ -32,6 +32,8 @@ class Profile extends Component
 
     public string $username = '';
 
+    public string $email = '';
+
     public string $gender = '';
 
     public ?string $password = null;
@@ -49,6 +51,7 @@ class Profile extends Component
             'first_name',
             'last_name',
             'username',
+            'email',
             'gender'
         ]));
     }

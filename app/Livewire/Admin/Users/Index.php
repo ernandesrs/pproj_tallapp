@@ -13,7 +13,7 @@ class Index extends Component
 {
     use WithPagination, Interactions;
 
-    public ?int $quantity = 5;
+    public ?int $quantity = 15;
 
     public ?string $search = null;
 

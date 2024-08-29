@@ -15,6 +15,7 @@ class UserRules implements RulesInterface
             'first_name' => ['required', 'string', 'max:25'],
             'last_name' => ['required', 'string', 'max:50'],
             'username' => ['required', 'string', 'max:25', 'unique:users,username'],
+            'email' => ['required', 'email', 'unique:users,email'],
             'gender' => ['required', 'string', \Illuminate\Validation\Rule::in(['n', 'f', 'm'])],
             'password' => ['required', 'string', 'confirmed'],
         ];
@@ -31,6 +32,7 @@ class UserRules implements RulesInterface
 
         $rules['username'] = ['required', 'string', 'max:25', 'unique:users,username,' . $model->id];
         $rules['password'] = ['nullable', 'string', 'confirmed'];
+        unset($rules['email']);
 
         return $rules;
     }

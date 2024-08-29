@@ -3,7 +3,7 @@
 
     <x-slot:actions>
         @can([\App\Enums\Roles\Permissions\UserPermissionsEnum::CREATE->value])
-            <x-button wire:navigate href="{{ route('admin.users.index') }}" color="emerald" icon="plus" position="left">
+            <x-button wire:navigate href="{{ route('admin.users.create') }}" color="emerald" icon="plus" position="left">
                 Novo usuário
             </x-button>
         @endcan

@@ -77,7 +77,12 @@
                             'text' => 'Usuários',
                             'permissions' => [\App\Enums\Roles\Permissions\UserPermissionsEnum::VIEW_ANY],
                             'route' => ['name' => 'admin.users.index'],
-                            'activeIn' => ['admin.users.index'],
+                            'activeIn' => [
+                                'admin.users.index',
+                                'admin.users.create',
+                                'admin.users.show',
+                                'admin.users.edit',
+                            ],
                         ],
                         [
                             'icon' => 'shield-half',
