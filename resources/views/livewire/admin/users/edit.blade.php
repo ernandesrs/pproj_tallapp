@@ -73,24 +73,35 @@
                         Cargos:
                     </div>
                     <div class="flex-1 flex flex-wrap items-center gap-5">
-                        @php
-                            $roles = $user->roles();
-                            $roleCount = $roles->count();
-
-                            $roles = $roles->limit(3)->get();
-                        @endphp
-
                         @foreach ($roles as $role)
                             <x-badge text="{{ $role->name }}" outline xs />
                         @endforeach
                     </div>
                 </div>
 
-            </x-admin.content-card>
+                <div class="flex mt-2">
+                    <x-link href="#" text="Atribuir cargos" icon="user-shield"
+                        x-on:click.prevent="$modalOpen('edit-user-roles-modal')" />
 
-            <x-admin.content-card
-                title="Conta"
-                class="col-span-12">
+                    {{-- edit roles modal --}}
+                    <x-modal title="Cargos do {{ $user->first_name }} {{ $user->last_name }}" id="edit-user-roles-modal"
+                        size="3xl" z-index="z-40" persistent center>
+                        <div class="flex flex-wrap gap-3">
+                            @foreach (\App\Models\Role::avaiableRoles() as $aRole)
+                                @php
+                                    $hasRole = $user->hasRole($aRole);
+                                @endphp
+                                <x-button wire:click="updateRole('{{ $aRole->value }}')"
+                                    text="{{ $aRole->label() }}"
+                                    :color="$hasRole ? 'emerald' : 'gray'"
+                                    :flat="!$hasRole"
+                                    :icon="$hasRole ? 'check' : 'plus'" />
+                            @endforeach
+                        </div>
+                    </x-modal>
+                    {{-- /edit roles modal --}}
+                </div>
+
             </x-admin.content-card>
         </div>
     </div>

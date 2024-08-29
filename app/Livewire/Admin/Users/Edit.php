@@ -15,6 +15,9 @@ class Edit extends Component
     #[Locked]
     public User $user;
 
+    #[Locked]
+    public \Illuminate\Database\Eloquent\Collection $roles;
+
     public string $first_name = '';
 
     public string $last_name = '';
@@ -37,6 +40,7 @@ class Edit extends Component
     public function mount(User $user)
     {
         $this->user = $user;
+        $this->roles = $this->user->roles()->get();
         $this->fill($this->user->only(['first_name', 'last_name', 'username', 'email', 'gender']));
     }
 
@@ -76,6 +80,44 @@ class Edit extends Component
         $this->toast()
             ->info('Atualizado!', 'Os dados de perfil do usuário foram atualizados!')
             ->send();
+    }
+
+    /**
+     * Update user role
+     * @param string $role valid role name
+     * @return void
+     */
+    public function updateRole(string $role)
+    {
+        $this->authorize('updateUserRoles', $this->user);
+
+        $validator = \Validator::make([
+            'role' => $role
+        ], [
+            'role' => ['required', 'string', 'exists:roles,name']
+        ]);
+
+        if ($validator->fails()) {
+            $this->toast()
+                ->error('Erro!', 'O cargo informado é inválido.')
+                ->flash()
+                ->send();
+            return $this->redirect(route('admin.users.edit', ['user' => $this->user->id]));
+        }
+
+        $roleName = $validator->validated()['role'];
+
+        if ($this->user->hasRole($roleName)) {
+            $this->user->removeRole($roleName);
+            $this->toast()
+                ->info('Removido!', 'Cargo atribuído a ' . $this->user->first_name . ' foi revogado com sucesso.')
+                ->send();
+        } else {
+            $this->user->assignRole($roleName);
+            $this->toast()
+                ->success('Atribuído!', 'Novo cargo atribuído a ' . $this->user->first_name . ' com sucesso.')
+                ->send();
+        }
     }
 
     /**
