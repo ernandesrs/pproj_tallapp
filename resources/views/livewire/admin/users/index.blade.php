@@ -13,7 +13,9 @@
         <x-table :$headers :$rows filter :quantity="[5, 10, 15, 20]" paginate persistent loading>
             @interact('column_action', $row)
                 @can(\App\Enums\Roles\Permissions\UserPermissionsEnum::UPDATE->value)
-                    <x-button text="Editar" icon="edit" color="secondary" flat sm />
+                    <x-button wire:navigate href="{{ route('admin.users.edit', ['user' => $row->id]) }}" text="Editar"
+                        icon="edit"
+                        color="secondary" flat sm />
                 @endcan
                 @can(\App\Enums\Roles\Permissions\UserPermissionsEnum::DELETE->value)
                     <x-button wire:click="deleteItem({{ $row->id }})" text="Excluir" icon="trash" color="rose" flat
