@@ -89,7 +89,7 @@
                             'text' => 'Cargos',
                             'permissions' => [\App\Enums\Roles\Permissions\RolePermissionsEnum::VIEW_ANY],
                             'route' => ['name' => 'admin.roles.index'],
-                            'activeIn' => ['admin.roles.index'],
+                            'activeIn' => ['admin.roles.index', 'admin.roles.create', 'admin.roles.edit'],
                         ],
                         [
                             'icon' => 'user-circle',

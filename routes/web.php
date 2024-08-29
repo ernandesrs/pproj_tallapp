@@ -55,5 +55,7 @@ Route::group([
     Route::get('/users/{user}/edit', \App\Livewire\Admin\Users\Edit::class)->name('admin.users.edit');
 
     Route::get('/roles', \App\Livewire\Admin\Roles\Index::class)->name('admin.roles.index');
+    Route::get('/roles/create', \App\Livewire\Admin\Roles\Create::class)->name('admin.roles.create');
+    Route::get('/roles{role}/edit', \App\Livewire\Admin\Roles\Edit::class)->name('admin.roles.edit');
 
 });
