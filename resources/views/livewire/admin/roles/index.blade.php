@@ -13,7 +13,7 @@
         <x-table :$headers :$rows filter :quantity="[5, 10, 15, 20]" paginate persistent loading>
             @interact('column_action', $row)
                 @can(\App\Enums\Roles\Permissions\RolePermissionsEnum::UPDATE->value)
-                    <x-button wire:navigate href="{{ route('admin.users.edit', ['user' => $row->id]) }}" text="Editar"
+                    <x-button wire:navigate href="{{ route('admin.roles.edit', ['role' => $row->id]) }}" text="Editar"
                         icon="edit"
                         color="secondary" flat sm />
                 @endcan
