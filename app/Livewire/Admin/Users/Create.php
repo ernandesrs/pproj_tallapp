@@ -81,6 +81,6 @@ class Create extends Component
             ->flash()
             ->send();
 
-        return $this->redirect(route('admin.users.index'));
+        return $this->redirect(route('admin.users.edit', ['user' => $created->id]));
     }
 }
