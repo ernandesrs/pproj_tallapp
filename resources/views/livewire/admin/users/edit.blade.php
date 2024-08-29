@@ -72,7 +72,7 @@
                     <div class="flex-1 font-medium">
                         Cargos:
                     </div>
-                    <div class="flex-1">
+                    <div class="flex-1 flex flex-wrap items-center gap-5">
                         @php
                             $roles = $user->roles();
                             $roleCount = $roles->count();
@@ -81,9 +81,8 @@
                         @endphp
 
                         @foreach ($roles as $role)
-                            <x-badge text="{{ $role->name }}" xs />
+                            <x-badge text="{{ $role->name }}" outline xs />
                         @endforeach
-
                     </div>
                 </div>
 
