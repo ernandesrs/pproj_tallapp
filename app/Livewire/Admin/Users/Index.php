@@ -17,7 +17,7 @@ class Index extends Component
 
     public ?string $search = null;
 
-    public ?int $page = 2;
+    public ?int $page = 1;
 
     /**
      * Render
