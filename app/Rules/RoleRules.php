@@ -13,7 +13,9 @@ class RoleRules implements RulesInterface
     static public function creationRules(): array
     {
         return [
-            'name' => ['required', 'string', 'unique:roles,name']
+            'name' => ['required', 'string', 'unique:roles,name'],
+            'display_name' => ['required', 'string', 'max:25'],
+            'description' => ['nullable', 'string', 'max:255']
         ];
     }
 
@@ -24,9 +26,15 @@ class RoleRules implements RulesInterface
      */
     static public function updateRules(\Illuminate\Database\Eloquent\Model $model): array
     {
-        return [
-            'name' => ['required', 'string', 'unique:roles,name,' . $model->id]
-        ];
+        $rules = self::creationRules();
+
+        // if (!$model->protected) {
+        //     $rules['name'] = ['required', 'string', 'unique:roles,name,' . $model->id];
+        // } else {
+            unset($rules['name']);
+        // }
+
+        return $rules;
     }
 
     /**

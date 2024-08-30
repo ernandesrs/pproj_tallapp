@@ -16,7 +16,7 @@ class Index extends Component
      * Model
      * @return \Illuminate\Database\Eloquent\Model
      */
-    static function model(): \Illuminate\Database\Eloquent\Model
+    static function model(): Model
     {
         return new Role();
     }
@@ -27,7 +27,7 @@ class Index extends Component
      */
     static function searchables(): string|null
     {
-        return 'name';
+        return 'name,display_name';
     }
 
     /**
@@ -39,8 +39,7 @@ class Index extends Component
         return view('livewire..admin.roles.index', [
             'headers' => [
                 ['index' => 'id', 'label' => 'ID'],
-                ['index' => 'name', 'label' => 'Nome'],
-                ['index' => 'guard_name', 'label' => 'Guard'],
+                ['index' => 'display_name', 'label' => 'Nome'],
                 ['index' => 'created_at', 'label' => 'Criado em'],
                 ['index' => 'action', 'label' => 'Ações'],
             ],

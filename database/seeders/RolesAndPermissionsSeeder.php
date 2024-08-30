@@ -27,7 +27,9 @@ class RolesAndPermissionsSeeder extends Seeder
         \App\Models\Role::avaiableRoles()->map(function ($role) {
             $registeredRole = \App\Models\Role::create([
                 'guard_name' => 'web',
-                'name' => $role->value
+                'name' => $role->value,
+                'display_name' => $role->label(),
+                'protected' => true
             ]);
 
             // Giving permissions to registered role

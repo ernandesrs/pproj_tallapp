@@ -13,6 +13,10 @@ class Create extends Component
 
     public string $name = '';
 
+    public string $display_name = '';
+
+    public null|string $description = '';
+
     /**
      * Render view
      * @return mixed

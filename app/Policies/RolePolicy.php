@@ -35,9 +35,10 @@ class RolePolicy extends BasePolicy
     public function update(User $user, Model $model): bool
     {
         // can't edit role super user
-        if ($model->name == \App\Enums\Roles\RoleEnum::SUPER->value) {
-            return false;
-        }
+        // if ($model->name == \App\Enums\Roles\RoleEnum::SUPER->value) {
+        //     return false;
+        // }
+        // UPDATE: now can update 'display_name', 'description', but not 'name'. This validation is in RoleRules class
 
         return parent::update($user, $model);
     }

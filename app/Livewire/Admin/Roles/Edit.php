@@ -21,6 +21,10 @@ class Edit extends Component
 
     public string $name;
 
+    public string $display_name = '';
+
+    public null|string $description = '';
+
     /**
      * Mount
      * @param \App\Models\Role $role
@@ -30,7 +34,9 @@ class Edit extends Component
     {
         $this->role = $role;
         $this->fill($this->role->only([
-            'name'
+            'name',
+            'display_name',
+            'description',
         ]));
     }
 

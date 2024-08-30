@@ -11,21 +11,12 @@
 
     <x-admin.content-card class="col-span-12 lg:col-span-4">
         <div class="grid grid-cols-12 gap-6">
-            <div class="col-span-12">
-                <x-input wire:model="name" label="Name do cargo *" />
-            </div>
+            @include('livewire.admin.roles.partials.role-fields', ['role' => $role])
 
-            @if (in_array($role->name, [\App\Enums\Roles\RoleEnum::SUPER->value, \App\Enums\Roles\RoleEnum::ADMIN->value]))
-                <div class="col-span-12">
-                    <x-alert icon="lock" title="Protegido!" text="Cargos padrões não pode ser atualizados."
-                        color="secondary" outline />
-                </div>
-            @else
-                <div class="col-span-12 flex justify-center">
-                    <x-button wire:target="update" wire:click="update" text="Atualizar cargo" icon="check"
-                        loading />
-                </div>
-            @endif
+            <div class="col-span-12 flex justify-center">
+                <x-button wire:target="update" wire:click="update" text="Atualizar cargo" icon="check"
+                    loading />
+            </div>
         </div>
     </x-admin.content-card>
 

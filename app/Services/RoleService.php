@@ -35,7 +35,6 @@ class RoleService implements ServicesInterface
         if (!$model->update($validated)) {
             return null;
         }
-
         return $model->fresh();
     }
 
