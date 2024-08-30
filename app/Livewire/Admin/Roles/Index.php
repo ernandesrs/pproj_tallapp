@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Roles;
 
 use App\Livewire\Admin\Traits\ListTrait;
 use App\Models\Role;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use TallStackUi\Traits\Interactions;
 
@@ -54,13 +55,14 @@ class Index extends Component
 
     /**
      * Delete item confirmation
-     * @param Role $role
+     * @param int $id
      * @return void
      */
-    public function deleteItem(Role $role)
+    public function deleteItem(int $id): void
     {
+        $role = Role::where('id', $id)->firstOrFail(['id', 'name']);
         $this->dialog()
-            ->warning('Excluir cargo?', 'Você está excluindo o cargo ' . $role->name . ' e isso não pode ser desfeito, confirme para continuar.')
+            ->warning('Excluir cargo?', 'Você está excluindo um cargo ' . $role->name . ' e isso não pode ser desfeito, confirme para continuar.')
             ->cancel('Cancelar')
             ->confirm('Confirmar', 'deleteItemConfirmed', ['role' => $role->id])
             ->send();

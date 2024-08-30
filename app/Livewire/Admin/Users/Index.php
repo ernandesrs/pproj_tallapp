@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Users;
 use App\Livewire\Admin\Traits\ListTrait;
 use App\Models\User;
 use App\Services\UserService;
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use TallStackUi\Traits\Interactions;
 
@@ -57,11 +58,13 @@ class Index extends Component
 
     /**
      * Delete item
-     * @param \App\Models\User $user
+     * @param int $id
      * @return void
      */
-    public function deleteItem(User $user)
+    public function deleteItem(int $id): void
     {
+        $user = User::where('id', $id)->firstOrFail(['id', 'first_name', 'last_name']);
+
         $this->dialog()
             ->warning('Tem certeza?', 'Você está excluindo o usuário ' . $user->first_name . ' ' . $user->last_name . ', confirme para continuar.')
             ->cancel('Cancelar')

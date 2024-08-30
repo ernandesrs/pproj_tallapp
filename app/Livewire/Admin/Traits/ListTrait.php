@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Traits;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use League\CommonMark\Node\Inline\AbstractInline;
 use Livewire\WithPagination;
 
 trait ListTrait
@@ -32,6 +33,13 @@ trait ListTrait
      * @return null|string all searchable fields(full text index required), separated with ','.
      */
     abstract static function searchables(): null|string;
+
+    /**
+     * Delete item
+     * @param int $id
+     * @return void
+     */
+    abstract public function deleteItem(int $id): void;
 
     /**
      * Get items

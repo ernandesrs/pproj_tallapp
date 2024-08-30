@@ -50,12 +50,13 @@ Route::group([
 ], function () {
 
     Route::get('/', \App\Livewire\Admin\Overview::class)->name('admin.overview');
+
     Route::get('/users', \App\Livewire\Admin\Users\Index::class)->name('admin.users.index');
     Route::get('/users/create', \App\Livewire\Admin\Users\Create::class)->name('admin.users.create');
     Route::get('/users/{user}/edit', \App\Livewire\Admin\Users\Edit::class)->name('admin.users.edit');
 
     Route::get('/roles', \App\Livewire\Admin\Roles\Index::class)->name('admin.roles.index');
     Route::get('/roles/create', \App\Livewire\Admin\Roles\Create::class)->name('admin.roles.create');
-    Route::get('/roles{role}/edit', \App\Livewire\Admin\Roles\Edit::class)->name('admin.roles.edit');
+    Route::get('/roles/{role}/edit', \App\Livewire\Admin\Roles\Edit::class)->name('admin.roles.edit');
 
 });
