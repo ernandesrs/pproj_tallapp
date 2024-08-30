@@ -2,21 +2,32 @@
 
 namespace App\Livewire\Admin\Roles;
 
+use App\Livewire\Admin\Traits\ListTrait;
 use App\Models\Role;
-use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
-use Livewire\WithPagination;
 use TallStackUi\Traits\Interactions;
 
 class Index extends Component
 {
-    use WithPagination, Interactions;
+    use ListTrait, Interactions;
 
-    public ?int $quantity = 15;
+    /**
+     * Model
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    static function model(): \Illuminate\Database\Eloquent\Model
+    {
+        return new Role();
+    }
 
-    public ?string $search = null;
-
-    public ?int $page = 1;
+    /**
+     * Searchable fields
+     * @return string|null
+     */
+    static function searchables(): string|null
+    {
+        return 'name';
+    }
 
     /**
      * Render view
@@ -32,10 +43,7 @@ class Index extends Component
                 ['index' => 'created_at', 'label' => 'Criado em'],
                 ['index' => 'action', 'label' => 'Ações'],
             ],
-            'rows' => Role::query()->when($this->search, function (Builder $query) {
-                return $query->whereRaw('MATCH(name) AGAINST(? IN BOOLEAN MODE)', $this->search);
-            })->offset($this->page)->paginate($this->quantity)
-                ->withQueryString(),
+            'rows' => $this->getItems(),
         ])
             ->layout('components.layouts.admin', [
                 'seo' => (object) [

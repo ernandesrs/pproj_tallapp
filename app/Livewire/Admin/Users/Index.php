@@ -2,22 +2,33 @@
 
 namespace App\Livewire\Admin\Users;
 
+use App\Livewire\Admin\Traits\ListTrait;
 use App\Models\User;
 use App\Services\UserService;
-use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
-use Livewire\WithPagination;
 use TallStackUi\Traits\Interactions;
 
 class Index extends Component
 {
-    use WithPagination, Interactions;
+    use ListTrait, Interactions;
 
-    public ?int $quantity = 15;
+    /**
+     * Model
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    static function model(): \Illuminate\Database\Eloquent\Model
+    {
+        return new User();
+    }
 
-    public ?string $search = null;
-
-    public ?int $page = 1;
+    /**
+     * Searchable fields
+     * @return null|string
+     */
+    static function searchables(): null|string
+    {
+        return 'first_name,last_name,username,email';
+    }
 
     /**
      * Render
@@ -35,11 +46,7 @@ class Index extends Component
                 ['index' => 'email', 'label' => 'E-mail'],
                 ['index' => 'action', 'label' => 'Ações']
             ],
-            'rows' => User::query()->when($this->search, function (Builder $query) {
-                return $query->whereRaw('MATCH(first_name,last_name,username,email) AGAINST(? IN BOOLEAN MODE)', $this->search);
-            })->offset($this->page)->paginate($this->quantity)
-                ->withQueryString(),
-            'type' => 'data'
+            'rows' => $this->getItems()
         ])
             ->layout('components.layouts.admin', [
                 'seo' => (object) [
