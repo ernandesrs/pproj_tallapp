@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Roles;
 
 use App\Models\Role;
+use App\Services\RoleService;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 use TallStackUi\Traits\Interactions;
@@ -47,13 +48,52 @@ class Edit extends Component
             ]);
     }
 
+    /**
+     * Update a role
+     * @return void
+     */
     public function update()
     {
         $this->authorize('update', $this->role);
+
+        RoleService::update(RoleService::rules()::updateRules($this->role), $this->role);
     }
 
+    /**
+     * Assign or revoke permission
+     * @param string $name
+     * @return void
+     */
     public function assignOrRevokePermission(string $name)
     {
-        dd($name);
+        $this->authorize('update', $this->role);
+
+        $validator = \Validator::make(
+            [
+                'permission' => $name
+            ],
+            RoleService::rules()::rolePermissionRules()
+        );
+
+        if ($validator->fails()) {
+            $this->toast()
+                ->error('Erro!', 'Permissão inválida.')
+                ->flash()
+                ->send();
+
+            return $this->redirect(route('admin.roles.edit', ['role' => $this->role->id]));
+        }
+
+        if ($this->role->hasPermissionTo($name)) {
+            $this->role->revokePermissionTo($name);
+            $this->toast()
+                ->info('Revogada!', 'Permissão revogada para ' . $this->role->name)
+                ->send();
+        } else {
+            $this->role->givePermissionTo($name);
+            $this->toast()
+                ->info('Atribuída!', 'Permissão atribuída para ' . $this->role->name)
+                ->send();
+        }
     }
 }
