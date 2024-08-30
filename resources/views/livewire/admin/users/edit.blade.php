@@ -80,28 +80,28 @@
                 </div>
 
                 <div class="flex mt-2">
-                    @can('edit_role', $user)
+                    @can('updateUserRoles', $user)
                         <x-link href="#" text="Atribuir cargos" icon="user-shield"
                             x-on:click.prevent="$modalOpen('edit-user-roles-modal')" />
-                    @endcan
 
-                    {{-- edit roles modal --}}
-                    <x-modal title="Cargos do {{ $user->first_name }} {{ $user->last_name }}" id="edit-user-roles-modal"
-                        size="3xl" z-index="z-40" persistent center>
-                        <div class="flex flex-wrap gap-3">
-                            @foreach (\App\Models\Role::avaiableRoles() as $aRole)
-                                @php
-                                    $hasRole = $user->hasRole($aRole);
-                                @endphp
-                                <x-button wire:click="updateRole('{{ $aRole->value }}')"
-                                    text="{{ $aRole->label() }}"
-                                    :color="$hasRole ? 'emerald' : 'gray'"
-                                    :flat="!$hasRole"
-                                    :icon="$hasRole ? 'check' : 'plus'" />
-                            @endforeach
-                        </div>
-                    </x-modal>
-                    {{-- /edit roles modal --}}
+                        {{-- edit roles modal --}}
+                        <x-modal title="Cargos do {{ $user->first_name }} {{ $user->last_name }}" id="edit-user-roles-modal"
+                            size="3xl" z-index="z-40" persistent center>
+                            <div class="flex flex-wrap gap-3">
+                                @foreach (\App\Models\Role::avaiableRoles() as $aRole)
+                                    @php
+                                        $hasRole = $user->hasRole($aRole);
+                                    @endphp
+                                    <x-button wire:click="updateRole('{{ $aRole->value }}')"
+                                        text="{{ $aRole->label() }}"
+                                        :color="$hasRole ? 'emerald' : 'gray'"
+                                        :flat="!$hasRole"
+                                        :icon="$hasRole ? 'check' : 'plus'" />
+                                @endforeach
+                            </div>
+                        </x-modal>
+                        {{-- /edit roles modal --}}
+                    @endcan
                 </div>
 
             </x-admin.content-card>
