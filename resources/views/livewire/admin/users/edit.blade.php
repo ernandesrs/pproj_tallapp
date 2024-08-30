@@ -80,8 +80,10 @@
                 </div>
 
                 <div class="flex mt-2">
-                    <x-link href="#" text="Atribuir cargos" icon="user-shield"
-                        x-on:click.prevent="$modalOpen('edit-user-roles-modal')" />
+                    @can('edit_role', $user)
+                        <x-link href="#" text="Atribuir cargos" icon="user-shield"
+                            x-on:click.prevent="$modalOpen('edit-user-roles-modal')" />
+                    @endcan
 
                     {{-- edit roles modal --}}
                     <x-modal title="Cargos do {{ $user->first_name }} {{ $user->last_name }}" id="edit-user-roles-modal"
