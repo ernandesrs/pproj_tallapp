@@ -40,5 +40,20 @@ class AppServiceProvider extends ServiceProvider
             ->block('footer.wrapper')
             ->replace('text-secondary-700', 'text-dark-600')
             ->replace('dark:text-dark-300', 'dark:text-dark-300');
+
+        TallStackUi::personalize()
+            ->table()
+
+            ->block('wrapper')
+            ->replace('dark:ring-dark-600', 'dark:ring-dark-700')
+
+            ->block('table.tbody')
+            ->replace('dark:bg-dark-700', 'dark:bg-dark-800')
+
+            ->block('table.thead.normal')
+            ->replace('dark:bg-dark-600', 'dark:bg-dark-700')
+
+            ->block('table.thead.striped')
+            ->replace('dark:bg-dark-700', 'dark:bg-dark-800');
     }
 }
