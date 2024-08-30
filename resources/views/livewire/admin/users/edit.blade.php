@@ -2,7 +2,7 @@
     title="Editar usuário">
 
     <x-slot:actions>
-        @can([\App\Enums\Roles\Permissions\UserPermissionsEnum::CREATE->value])
+        @can('create', \App\Models\User::class)
             <x-button wire:navigate href="{{ route('admin.users.create') }}" color="emerald" icon="plus" position="left">
                 Novo usuário
             </x-button>

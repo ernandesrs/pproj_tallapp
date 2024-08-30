@@ -2,7 +2,7 @@
     title="Editar cargo">
 
     <x-slot:actions>
-        @can([\App\Enums\Roles\Permissions\RolePermissionsEnum::CREATE->value])
+        @can('create', \App\Models\Role::class)
             <x-button wire:navigate href="{{ route('admin.roles.create') }}" color="emerald" icon="plus" position="left">
                 Novo cargo
             </x-button>
