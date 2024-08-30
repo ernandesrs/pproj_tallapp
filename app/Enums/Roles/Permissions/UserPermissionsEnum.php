@@ -39,7 +39,9 @@ enum UserPermissionsEnum: string
             static::CREATE => 'Create user',
             static::UPDATE => 'Edit user',
             static::DELETE => 'Delete user',
+            static::FORCE_DELETE => 'Force delete user',
             static::DELETE_MANY => 'Delete many users',
+            static::RESTORE => 'Restore users',
             static::EDIT_ROLE => 'Edit user roles',
         };
     }

@@ -46,4 +46,14 @@ class Edit extends Component
                 ]
             ]);
     }
+
+    public function update()
+    {
+        $this->authorize('update', $this->role);
+    }
+
+    public function assignOrRevokePermission(string $name)
+    {
+        dd($name);
+    }
 }
