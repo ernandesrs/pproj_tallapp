@@ -10,19 +10,11 @@
     </x-slot>
 
     <div class="col-span-12">
-        <x-table :$headers :$rows filter :quantity="[5, 10, 15, 20]" paginate persistent loading>
-            @interact('column_action', $row)
-                @can('update', $row)
-                    <x-button wire:navigate href="{{ route('admin.users.edit', ['user' => $row->id]) }}" text="Editar"
-                        icon="edit"
-                        color="primary" flat sm />
-                @endcan
-                @can('delete', $row)
-                    <x-button wire:click="deleteItem({{ $row->id }})" text="Excluir" icon="trash" color="rose" flat
-                        sm />
-                @endcan
-            @endinteract
-        </x-table>
+        <x-admin.list-table
+            :headers="$headers"
+            :rows="$rows"
+            :action-edit="fn($row) => route('admin.users.edit', ['user' => $row->id])"
+            action-delete />
     </div>
 
 </x-admin.page>
