@@ -22,7 +22,7 @@
 <div {{ $attributes }}>
     <x-card>
         <div class="flex gap-4 items-center text-zinc-600 dark:text-zinc-300">
-            <x-icon name="{{ $icon }}" />
+            <x-icon name="{{ $icon }}" class="w-11 h-11" />
             <div>
                 <h3 class="text-xl">
                     {{ $title }}
