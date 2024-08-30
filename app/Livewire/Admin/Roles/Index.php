@@ -43,4 +43,34 @@ class Index extends Component
                 ]
             ]);
     }
+
+    /**
+     * Delete item confirmation
+     * @param Role $role
+     * @return void
+     */
+    public function deleteItem(Role $role)
+    {
+        $this->dialog()
+            ->warning('Excluir cargo?', 'Você está excluindo o cargo ' . $role->name . ' e isso não pode ser desfeito, confirme para continuar.')
+            ->cancel('Cancelar')
+            ->confirm('Confirmar', 'deleteItemConfirmed', ['role' => $role->id])
+            ->send();
+    }
+
+    /**
+     * Delete item confirmed
+     * @param \App\Models\Role $role
+     * @return void
+     */
+    public function deleteItemConfirmed(Role $role)
+    {
+        $this->authorize('delete', $role);
+
+        $role->delete();
+
+        $this->toast()
+            ->info('Excluído!', 'Cargo excluído com sucesso!')
+            ->send();
+    }
 }

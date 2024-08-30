@@ -56,7 +56,14 @@ class Edit extends Component
     {
         $this->authorize('update', $this->role);
 
-        RoleService::update(RoleService::rules()::updateRules($this->role), $this->role);
+        RoleService::update(
+            $this->validate(RoleService::rules()::updateRules($this->role)),
+            $this->role
+        );
+
+        $this->toast()
+            ->success('Atualizado!', 'Função atualizada com sucesso.')
+            ->send();
     }
 
     /**
