@@ -79,23 +79,23 @@
                         outline />
                     <div class="flex mt-4">
                         <div class="flex flex-wrap gap-3">
-                            @foreach (\App\Models\Role::avaiableRoles() as $aRole)
+                            @foreach (\App\Models\Role::all() as $aRole)
                                 @php
                                     $hasRole = $user->hasRole($aRole);
                                 @endphp
                                 <x-button
                                     x-data="{
                                         ...{{ json_encode([
-                                            'name' => $aRole->value,
+                                            'name' => $aRole->name,
                                             'promotion' => [
-                                                'title' => 'Atribuindo o cargo ' . $aRole->label() . ' ao usuário. Tem certeza?',
+                                                'title' => 'Atribuindo o cargo ' . $aRole->display_name . ' ao usuário. Tem certeza?',
                                                 'text' =>
-                                                    $aRole->description() .
-                                                    '. <br /><br /> <b>Permissões deste cargo:</b><br />' .
-                                                    \App\Models\Role::findByName($aRole->value)->permissions()->get()->map(fn($permission) => $permission->name)->join(', '),
+                                                    $aRole->description .
+                                                    ' <br /><br /> <b>Permissões deste cargo:</b><br />' .
+                                                    \App\Models\Role::findByName($aRole->name)->permissions()->get()->map(fn($permission) => $permission->name)->join(', '),
                                             ],
                                             'demotion' => [
-                                                'title' => 'Revogando o cargo ' . $aRole->label() . '. Tem certeza?',
+                                                'title' => 'Revogando o cargo ' . $aRole->display_name . '. Tem certeza?',
                                                 'text' => 'O usuário perderá todas as permissões atreladas a este cargo.',
                                             ],
                                         ]) }},
@@ -120,7 +120,7 @@
                                     }"
 
                                     x-on:click="{{ $hasRole ? 'demotionConfirmation' : 'promotionConfirmation' }}"
-                                    text="{{ $aRole->label() }}"
+                                    text="{{ $aRole->display_name }}"
                                     :color="$hasRole ? 'emerald' : 'gray'"
                                     :outline="!$hasRole"
                                     :icon="$hasRole ? 'check' : 'plus'"
