@@ -28,6 +28,7 @@ class RolesAndPermissionsSeeder extends Seeder
             $registeredRole = \App\Models\Role::create([
                 'guard_name' => 'web',
                 'name' => $role->value,
+                'description' => $role->description(),
                 'display_name' => $role->label(),
                 'protected' => true
             ]);
