@@ -19,14 +19,7 @@ Route::group([
     'prefix' => 'auth'
 ], function () {
 
-    Route::get('/login', function (\Illuminate\Http\Request $request) {
-        $as = $request->get('as');
-        $user = $as == 'admin' ? \App\Models\User::where('id', 2)->firstOrFail() : \App\Models\User::where('id', 1)->firstOrFail();
-
-        // fake login
-        \Auth::login($user);
-        return redirect(route('admin.overview'));
-    })->name('auth.login');
+    Route::get('/login', \App\Livewire\Auth\Login::class)->name('auth.login');
 
     Route::get('/logout', function () {
         \Auth::logout();
