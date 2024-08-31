@@ -24,8 +24,8 @@ class Login extends Component
     {
         return view('livewire..auth.login')
             ->layout('components.layouts.auth', [
-                'seo' => [
-                    'title' => 'Login'
+                'seo' => (object) [
+                    'title' => 'Acesse sua conta'
                 ]
             ]);
     }
