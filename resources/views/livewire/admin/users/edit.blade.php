@@ -121,7 +121,7 @@
 
                                     x-on:click="{{ $hasRole ? 'demotionConfirmation' : 'promotionConfirmation' }}"
                                     text="{{ $aRole->display_name }}"
-                                    :color="$hasRole ? 'emerald' : 'gray'"
+                                    :color="$hasRole ? 'emerald' : 'light'"
                                     :outline="!$hasRole"
                                     :icon="$hasRole ? 'check' : 'plus'"
                                     sm />
