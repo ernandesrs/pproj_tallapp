@@ -24,14 +24,15 @@
         title="Permissões deste cargo"
         class="col-span-12 lg:col-span-8">
         @if ($role->name == \App\Enums\Roles\RoleEnum::SUPER->value)
-            <x-alert icon="info-square-rounded" title="Boa!" text="Este cargo possui todas as permissões."
+            <x-alert icon="lock-open"
+                text="Este cargo possui todas as permissões. Muito cuidado ao atribui-lo a um usuário."
                 color="secondary" outline />
         @else
             <div class="grid grid-cols-12 gap-6">
                 @foreach (\App\Models\Permission::avaiablePermissions() as $key => $group)
-                    <div class="col-span-12 flex items-center gap-3">
-                        <div><x-icon name="arrow-right" /></div>
-                        <div class="w-full text-base md:text-lg truncate">{{ $key }}</div>
+                    <div class="col-span-12 flex items-center gap-2">
+                        <div><x-icon name="arrow-right" class="w-8" /></div>
+                        <div class="w-full text-base md:text-lg truncate">{{ $group[0]->permissionsLabel() }}</div>
                     </div>
                     <div class="col-span-12 flex flex-wrap gap-6">
                         @foreach ($group as $permission)
@@ -41,8 +42,8 @@
                             <x-button
                                 wire:click="assignOrRevokePermission('{{ $permission->value }}')"
                                 text="{{ $permission->label() }}"
-                                :color="$hasPermission ? 'emerald' : 'gray'"
-                                :flat="!$hasPermission"
+                                :color="$hasPermission ? 'emerald' : 'light'"
+                                :outline="!$hasPermission"
                                 :icon="$hasPermission ? 'check' : 'plus'"
                                 sm />
                         @endforeach

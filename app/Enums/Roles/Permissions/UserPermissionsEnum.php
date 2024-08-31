@@ -34,15 +34,24 @@ enum UserPermissionsEnum: string
     function label(): string
     {
         return match ($this) {
-            static::VIEW_ANY => 'View any users',
-            static::VIEW => 'View user',
-            static::CREATE => 'Create user',
-            static::UPDATE => 'Edit user',
-            static::DELETE => 'Delete user',
-            static::FORCE_DELETE => 'Force delete user',
-            static::DELETE_MANY => 'Delete many users',
-            static::RESTORE => 'Restore users',
-            static::EDIT_ROLE => 'Edit user roles',
+            static::VIEW_ANY => 'Ver todos',
+            static::VIEW => 'Ver um',
+            static::CREATE => 'Criar',
+            static::UPDATE => 'Editar',
+            static::DELETE => 'Deletar',
+            static::FORCE_DELETE => 'Exclusão forçada',
+            static::DELETE_MANY => 'Deletar vários',
+            static::RESTORE => 'Restaurar',
+            static::EDIT_ROLE => 'Editar cargo do usuário',
         };
+    }
+
+    /**
+     * Permissions label
+     * @return string
+     */
+    function permissionsLabel(): string
+    {
+        return 'Permissões sobre usuários';
     }
 }

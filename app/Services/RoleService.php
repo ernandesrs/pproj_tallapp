@@ -51,9 +51,9 @@ class RoleService implements ServicesInterface
 
     /**
      * Role rules
-     * @return \App\Interfaces\RulesInterface
+     * @return \App\Rules\RoleRules
      */
-    static function rules(): \App\Interfaces\RulesInterface
+    static function rules(): RoleRules
     {
         return new RoleRules();
     }

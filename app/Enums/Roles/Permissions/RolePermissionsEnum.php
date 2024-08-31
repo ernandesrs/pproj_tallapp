@@ -28,12 +28,21 @@ enum RolePermissionsEnum: string
     function label(): string
     {
         return match ($this) {
-            static::VIEW_ANY => 'View any roles',
-            static::VIEW => 'View role',
-            static::CREATE => 'Create role',
-            static::UPDATE => 'Edit role',
-            static::DELETE => 'Delete role',
-            static::DELETE_MANY => 'Delete many roles',
+            static::VIEW_ANY => 'Ver todos',
+            static::VIEW => 'Ver um',
+            static::CREATE => 'Criar',
+            static::UPDATE => 'Editar',
+            static::DELETE => 'Deletar',
+            static::DELETE_MANY => 'Deletar vários',
         };
+    }
+
+    /**
+     * Permissions label
+     * @return string
+     */
+    function permissionsLabel(): string
+    {
+        return 'Permissões sobre funções';
     }
 }
