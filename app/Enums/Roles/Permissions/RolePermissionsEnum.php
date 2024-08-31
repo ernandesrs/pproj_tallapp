@@ -43,6 +43,6 @@ enum RolePermissionsEnum: string
      */
     function permissionsLabel(): string
     {
-        return 'Permissões sobre funções';
+        return 'Permissões sobre cargos';
     }
 }

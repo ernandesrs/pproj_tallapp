@@ -33,8 +33,8 @@ enum RoleEnum: string
     function description(): string
     {
         return match ($this) {
-            static::SUPER => 'Este cargo deve ser atribuído apenas ao proprietário ou proprietários do sistema, pois ele possui todas as permissões, SEM RESTRIÇÕES!',
-            static::ADMIN => 'Este cargo deve ser atribuído a administradores. Descreva-o conforme as permissões atruídas.',
+            static::SUPER => 'Este cargo deve ser atribuído apenas a proprietários do sistema, pois ele possui todas as permissões, SEM RESTRIÇÕES!',
+            static::ADMIN => 'Este cargo deve ser atribuído a administradores. Verifique com atenção as permissões deste cargo.',
         };
     }
 }

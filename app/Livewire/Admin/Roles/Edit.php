@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Roles;
 
 use App\Models\Role;
+use App\Models\User;
 use App\Services\RoleService;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
@@ -46,6 +47,8 @@ class Edit extends Component
      */
     public function render()
     {
+        $this->authorize('update', $this->role);
+
         return view('livewire..admin.roles.edit')
             ->layout('components.layouts.admin', [
                 'seo' => (object) [
@@ -108,5 +111,21 @@ class Edit extends Component
                 ->info('Atribuída!', 'Permissão atribuída para ' . $this->role->name)
                 ->send();
         }
+    }
+
+    /**
+     * Revoke this role from the provided user
+     * @param \App\Models\User $user
+     * @return void
+     */
+    public function revokeRoleFromUser(User $user)
+    {
+        $this->authorize('updateUserRoles', $user);
+
+        $user->removeRole($this->role);
+
+        $this->toast()
+            ->info('Pronto!', $user->email . ' não possui mais este cargo.')
+            ->send();
     }
 }

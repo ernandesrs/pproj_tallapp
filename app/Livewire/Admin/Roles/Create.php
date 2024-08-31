@@ -23,6 +23,8 @@ class Create extends Component
      */
     public function render()
     {
+        $this->authorize('create', Role::class);
+
         return view('livewire..admin.roles.create')
             ->layout('components.layouts.admin', [
                 'seo' => (object) [

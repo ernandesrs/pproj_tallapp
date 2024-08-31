@@ -36,6 +36,8 @@ class Index extends Component
      */
     public function render()
     {
+        $this->authorize('viewAny', Role::class);
+
         return view('livewire..admin.roles.index', [
             'headers' => [
                 ['index' => 'id', 'label' => 'ID'],
