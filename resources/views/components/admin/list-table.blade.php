@@ -27,7 +27,7 @@
         @if (isset($actionDelete) && !is_null($actionDelete))
             @can('delete', $row)
                 <x-admin.delete-confirmation
-                    text="Você está excluindo o item com o <b>ID {{ $row->id }}</b> deste lista, confirme para continuar."
+                    dialog-text="Você está excluindo o item com o <b>ID {{ $row->id }}</b> deste lista, confirme para continuar."
                     :confirm-param="$row->id" flat sm />
             @endcan
         @endif

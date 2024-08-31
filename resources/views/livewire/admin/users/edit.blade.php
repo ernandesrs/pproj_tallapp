@@ -40,8 +40,11 @@
                     </div>
 
                     @if ($user->avatar)
-                        <x-button wire:target="deleteAvatar" wire:click="deleteAvatar" text="Excluir" color="rose"
-                            icon="trash" sm />
+                        <x-admin.delete-confirmation
+                            confirm-method="deleteAvatar"
+                            text="Excluir avatar"
+                            dialog-text="Você está excluindo o avatar deste usuário, confirme para continuar?"
+                            sm />
                     @endif
                 </div>
             </x-admin.content-card>

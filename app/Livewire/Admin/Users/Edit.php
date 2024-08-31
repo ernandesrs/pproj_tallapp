@@ -12,7 +12,7 @@ class Edit extends Component
 {
     use Interactions;
 
-    public string $id='jfklajflaskd';
+    public string $id = 'jfklajflaskd';
 
     #[Locked]
     public User $user;
@@ -127,19 +127,6 @@ class Edit extends Component
      * @return void
      */
     public function deleteAvatar()
-    {
-        $this->dialog()
-            ->warning('Tem certeza?', 'Confirme a exclusão do avatar deste usuário.')
-            ->cancel('Cancelar')
-            ->confirm('Excluir avatar', 'deleteAvatarConfirmed')
-            ->send();
-    }
-
-    /**
-     * Delete avatar after confirmation
-     * @return void
-     */
-    public function deleteAvatarConfirmed()
     {
         $this->authorize('update', $this->user);
 

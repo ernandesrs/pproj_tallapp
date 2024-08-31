@@ -1,17 +1,25 @@
 @props([
-    'title' => 'Tem certeza?',
-    'text' => 'Você está excluindo este item desta lista, confirme para continuar.',
+    'dialogTitle' => 'Tem certeza?',
+    'dialogText' => 'Você está excluindo este item desta lista, confirme para continuar.',
     'confirmMethod' => 'deleteItem',
     'confirmParam' => null,
 ])
+
+@php
+    if (!$attributes->has('text')) {
+        $attributes = $attributes->merge([
+            'text' => 'Excluir',
+        ]);
+    }
+@endphp
 
 <x-button
     x-data="{
         ...{{ json_encode([
             'id' => null,
             'dialog' => [
-                'title' => $title,
-                'text' => $text,
+                'title' => $dialogTitle,
+                'text' => $dialogText,
                 'confirmMethod' => $confirmMethod,
                 'confirmParam' => $confirmParam,
             ],
@@ -27,4 +35,4 @@
         }
     }"
 
-    x-on:click="deleteItem" text="Excluir" icon="trash" color="rose" {{ $attributes }} />
+    x-on:click="deleteItem" icon="trash" color="rose" {{ $attributes }} />
