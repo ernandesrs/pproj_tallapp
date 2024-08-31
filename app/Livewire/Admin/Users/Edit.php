@@ -12,6 +12,8 @@ class Edit extends Component
 {
     use Interactions;
 
+    public string $id='jfklajflaskd';
+
     #[Locked]
     public User $user;
 

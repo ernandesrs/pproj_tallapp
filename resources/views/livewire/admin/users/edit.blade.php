@@ -67,44 +67,66 @@
                         {{ $user->created_at->format('d/m/Y H:i') }}
                     </div>
                 </div>
-
-                <div class="flex items-center gap-6">
-                    <div class="flex-1 font-medium">
-                        Cargos:
-                    </div>
-                    <div class="flex-1 flex flex-wrap items-center gap-5">
-                        @foreach ($roles as $role)
-                            <x-badge text="{{ $role->name }}" outline xs />
-                        @endforeach
-                    </div>
-                </div>
-
-                <div class="flex mt-2">
-                    @can('updateUserRoles', $user)
-                        <x-link href="#" text="Atribuir cargos" icon="user-shield"
-                            x-on:click.prevent="$modalOpen('edit-user-roles-modal')" />
-
-                        {{-- edit roles modal --}}
-                        <x-modal title="Cargos do {{ $user->first_name }} {{ $user->last_name }}" id="edit-user-roles-modal"
-                            size="3xl" z-index="z-40" persistent center>
-                            <div class="flex flex-wrap gap-3">
-                                @foreach (\App\Models\Role::avaiableRoles() as $aRole)
-                                    @php
-                                        $hasRole = $user->hasRole($aRole);
-                                    @endphp
-                                    <x-button wire:click="updateRole('{{ $aRole->value }}')"
-                                        text="{{ $aRole->label() }}"
-                                        :color="$hasRole ? 'emerald' : 'gray'"
-                                        :flat="!$hasRole"
-                                        :icon="$hasRole ? 'check' : 'plus'" />
-                                @endforeach
-                            </div>
-                        </x-modal>
-                        {{-- /edit roles modal --}}
-                    @endcan
-                </div>
-
             </x-admin.content-card>
+
+            @can('updateUserRoles', $user)
+                <x-admin.content-card title="Cargos" class="col-span-12">
+                    <x-alert icon="shield-exclamation" color="amber" title="Importante!"
+                        text="Muita atenção ao promover usuários, leia com cuidado as informações nas telas confirmação antes de confirmar."
+                        outline />
+                    <div class="flex mt-4">
+                        <div class="flex flex-wrap gap-3">
+                            @foreach (\App\Models\Role::avaiableRoles() as $aRole)
+                                @php
+                                    $hasRole = $user->hasRole($aRole);
+                                @endphp
+                                <x-button
+                                    x-data="{
+                                        ...{{ json_encode([
+                                            'name' => $aRole->value,
+                                            'promotion' => [
+                                                'title' => 'Atribuindo o cargo ' . $aRole->label() . ' ao usuário. Tem certeza?',
+                                                'text' =>
+                                                    $aRole->description() .
+                                                    '. <br /><br /> <b>Permissões deste cargo:</b><br />' .
+                                                    \App\Models\Role::findByName($aRole->value)->permissions()->get()->map(fn($permission) => $permission->name)->join(', '),
+                                            ],
+                                            'demotion' => [
+                                                'title' => 'Revogando o cargo ' . $aRole->label() . '. Tem certeza?',
+                                                'text' => 'O usuário perderá todas as permissões atreladas a este cargo.',
+                                            ],
+                                        ]) }},
+                                        promotionConfirmation() {
+                                            $interaction('dialog')
+                                                .wireable()
+                                                .warning(this.promotion.title, this.promotion.text)
+                                                .confirm('Confirmar', 'updateRole', this.name)
+                                                .cancel('Cancelar')
+                                                .send();
+
+                                        },
+                                        demotionConfirmation() {
+                                            $interaction('dialog')
+                                                .wireable()
+                                                .warning(this.demotion.title, this.demotion.text)
+                                                .confirm('Confirmar', 'updateRole', this.name)
+                                                .cancel('Cancelar')
+                                                .send();
+
+                                        }
+                                    }"
+
+                                    x-on:click="{{ $hasRole ? 'demotionConfirmation' : 'promotionConfirmation' }}"
+                                    text="{{ $aRole->label() }}"
+                                    :color="$hasRole ? 'emerald' : 'gray'"
+                                    :outline="!$hasRole"
+                                    :icon="$hasRole ? 'check' : 'plus'"
+                                    sm />
+                            @endforeach
+                        </div>
+                    </div>
+                </x-admin.content-card>
+            @endcan
         </div>
     </div>
 
