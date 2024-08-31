@@ -11,14 +11,11 @@
 
     <div class="col-span-12 lg:col-span-7 grid grid-cols-12 gap-6">
         <x-admin.content-card class="col-span-12">
-            <div class="grid grid-cols-12 gap-6">
+            <x-admin.form
+                submit-method="update"
+                submit-button-text="Atualizar cargo">
                 @include('livewire.admin.roles.partials.role-fields', ['role' => $role])
-
-                <div class="col-span-12 flex justify-center">
-                    <x-button wire:target="update" wire:click="update" text="Atualizar cargo" icon="check"
-                        loading />
-                </div>
-            </div>
+            </x-admin.form>
         </x-admin.content-card>
 
         <x-admin.content-card

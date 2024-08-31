@@ -14,13 +14,13 @@
             <x-admin.content-card
                 title="Dados básicos"
                 class="col-span-12">
-                <div class="grid grid-cols-12 gap-6">
+                <x-admin.form
+                    submit-method="update"
+                    submit-button-icon="user-check"
+                    submit-button-text="Atualizar usuário"
+                    class="grid-cols-12">
                     @include('livewire.admin.users.partials.basic-data-fields', ['edit' => true])
-                    <div class="col-span-12 flex justify-center">
-                        <x-button wire:target="update" wire:click="update" text="Atualizar usuário" icon="user-check"
-                            loading />
-                    </div>
-                </div>
+                </x-admin.form>
             </x-admin.content-card>
         </div>
 

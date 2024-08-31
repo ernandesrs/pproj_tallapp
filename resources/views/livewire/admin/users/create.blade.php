@@ -1,7 +1,11 @@
 <x-admin.page
     title="Novo usuário">
     <x-admin.content-card class="col-span-12">
-        <div class="grid grid-cols-12 gap-6">
+        <x-admin.form
+            submit-method="save"
+            submit-button-icon="user-plus"
+            submit-button-text="Salvar usuário"
+            class="grid-cols-12">
             @include('livewire.admin.users.partials.basic-data-fields')
 
             <div class="col-span-12 flex flex-col gap-5 justify-center items-center">
@@ -10,10 +14,7 @@
                         Enviar e-mail de confirmação
                     </x-slot:label>
                 </x-checkbox>
-
-                <x-button wire:target="save" wire:click="save" text="Criar usuário" icon="user-plus"
-                    loading />
             </div>
-        </div>
+        </x-admin.form>
     </x-admin.content-card>
 </x-admin.page>

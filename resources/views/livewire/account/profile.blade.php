@@ -61,14 +61,12 @@
             title="Dados de perfil"
             class="col-span-12">
 
-            <div class="grid grid-cols-12 gap-6">
+            <x-admin.form
+                submit-method="updateProfile"
+                submit-button-text="Atualizar"
+                submit-button-icon="user-check">
                 @include('livewire.admin.users.partials.basic-data-fields', ['edit' => true])
-
-                <div class="col-span-12 flex justify-center">
-                    <x-button wire:target="updateProfile" wire:click="updateProfile" text="Atualizar" icon="user-check"
-                        loading />
-                </div>
-            </div>
+            </x-admin.form>
         </x-admin.content-card>
     </div>
 
