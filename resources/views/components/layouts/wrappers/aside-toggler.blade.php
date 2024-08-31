@@ -12,7 +12,7 @@
 <div
     x-data=""
     x-on:click="$dispatch('toggle_aside')"
-    class="cursor-pointer ml-auto" role="button">
+    class="cursor-pointer" role="button">
     <div class="pointer-events-none">
         @isset($toggler)
             {{ $toggler }}

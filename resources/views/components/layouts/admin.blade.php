@@ -34,35 +34,6 @@
                     'px-6 py-4': !asideMiniOn,
                 }">
 
-                {{-- profile --}}
-                @php
-                    $logged = \Auth::user();
-                @endphp
-                <div
-                    class="flex justify-center items-center gap-4 bg-zinc-800 dark:bg-zinc-900 px-5 py-3 rounded-md cursor-default overflow-hidden">
-                    @if (!empty($logged->avatar))
-                        <x-avatar
-                            :image="\Str::startsWith($logged->avatar, ['http://', 'https://'])
-                                ? $logged->avatar
-                                : \Storage::url($logged->avatar)" md />
-                    @else
-                        <x-avatar text="{{ $logged->username[0] }}" md />
-                    @endif
-
-                    <x-transitions.fade
-                        on-enter-only
-                        x-show="!asideMiniOn">
-                        <div x-show="!asideMiniOn" class="w-full max-w-[50vw] sm:max-w-[125px] flex flex-col">
-                            <div class="font-semibold text-base truncate">
-                                {{ $logged->first_name }} {{ $logged->last_name }}
-                            </div>
-                            <div class="text-sm text-zinc-500 truncate">
-                                {{ $logged->email }}
-                            </div>
-                        </div>
-                    </x-transitions.fade>
-                </div>
-
                 <x-layouts.partials.admin.sidebar-section
                     title="Dashboard">
                     <x-layouts.partials.admin.sidebar-nav :items="[
@@ -114,8 +85,56 @@
                 <div class="flex items-center w-full h-full px-5 shadow-sm border-b dark:border-zinc-700">
 
                     <div class="flex gap-x-6 items-center ml-auto">
-                        {{-- theme toggler --}}
-                        <x-theme-switch md />
+
+                        {{-- profile dropdown --}}
+                        <x-dropdown>
+                            <x-slot:action>
+                                <div x-on:click="show = !show"
+                                    class="cursor-pointer flex items-center gap-x-2 px-3 py-2 rounded-md bg-zinc-100 dark:bg-zinc-800">
+                                    @php
+                                        $authUser = \Auth::user();
+                                    @endphp
+                                    <x-avatar :image="$authUser->avatar
+                                        ? (\Str::startsWith($authUser->avatar, ['http://', 'https://'])
+                                            ? $authUser->avatar
+                                            : \Storage::url($authUser->avatar))
+                                        : null" text="{{ $authUser->first_name }}" xs />
+                                    <div class="truncate max-w-[75px]">
+                                        {{ $authUser->first_name }} {{ $authUser->last_name }}
+                                    </div>
+                                </div>
+                            </x-slot:action>
+
+                            <div class="p-5 flex flex-col items-center justify-center">
+                                <x-avatar :image="$authUser->avatar
+                                    ? (\Str::startsWith($authUser->avatar, ['http://', 'https://'])
+                                        ? $authUser->avatar
+                                        : \Storage::url($authUser->avatar))
+                                    : null" text="{{ $authUser->first_name }}" lg />
+
+                                <div class="w-[90%] text-center mt-3">
+                                    <div class="truncate text-lg">
+                                        {{ $authUser->first_name }} {{ $authUser->last_name }}
+                                    </div>
+                                    <div class="truncate text-base text-zinc-400 dark:text-zinc-300">
+                                        {{ $authUser->email }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <x-dropdown.items wire:navigate href="{{ route('account.profile') }}" icon="user-circle"
+                                text="Meu perfil" separator />
+
+                            <x-dropdown.items icon="arrow-right" text="Dropdown #1" separator />
+
+                            <div class="p-5 flex flex-wrap justify-between items-center">
+                                {{-- theme toggler --}}
+                                <x-theme-switch lg />
+
+                                <x-button wire:navigate href="{{ route('auth.logout') }}" icon="logout"
+                                    text="Deslogar" color="rose" sm />
+                            </div>
+                        </x-dropdown>
 
                         {{-- aside toggler --}}
                         <x-layouts.wrappers.aside-toggler />
