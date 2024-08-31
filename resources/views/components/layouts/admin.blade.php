@@ -47,12 +47,25 @@
                             'icon' => 'users-group',
                             'text' => 'Usuários',
                             'permissions' => [\App\Enums\Roles\Permissions\UserPermissionsEnum::VIEW_ANY],
-                            'route' => ['name' => 'admin.users.index'],
                             'activeIn' => [
                                 'admin.users.index',
                                 'admin.users.create',
                                 'admin.users.show',
                                 'admin.users.edit',
+                            ],
+                            'items' => [
+                                [
+                                    'icon' => 'users-group',
+                                    'text' => 'Todos',
+                                    'route' => ['name' => 'admin.users.index'],
+                                    'activeIn' => ['admin.users.index'],
+                                ],
+                                [
+                                    'icon' => 'user-plus',
+                                    'text' => 'Criar usuário',
+                                    'route' => ['name' => 'admin.users.create'],
+                                    'activeIn' => ['admin.users.create'],
+                                ],
                             ],
                         ],
                         [

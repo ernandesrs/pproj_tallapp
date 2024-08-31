@@ -5,6 +5,7 @@
     'activeIn' => [],
     'activator' => false,
     'permissions' => [],
+    'target' => null,
 ])
 
 @php
@@ -38,11 +39,23 @@
 
     <a
         x-on:click="clicked"
-
         x-data="{
+            target: '{{ $target }}',
             activator: {{ $activator ? 1 : 0 }},
             activatorState: {
-                active: false
+                active: {{ $isActive ? 1 : 0 }}
+            },
+
+            init() {
+                $nextTick(() => {
+                    if (!this.activator) {
+                        return
+                    }
+
+                    if (this.activatorState.active) {
+                        $dispatch('toggle_nav_link_visibility', { id: this.target, show: this.activatorState.active })
+                    }
+                })
             },
 
             clicked(event) {
@@ -51,6 +64,7 @@
                 }
 
                 this.activatorState.active = !this.activatorState.active
+                $dispatch('toggle_nav_link_visibility', { id: this.target, show: this.activatorState.active })
             }
         }"
 
@@ -62,8 +76,9 @@
 
         <x-transitions.fade
             on-enter-only
-            x-show="!asideMiniOn">
-            <div class="flex-1 truncate">
+            x-show="!asideMiniOn"
+            class="flex-1">
+            <div class="truncate">
                 {{ $text }}
             </div>
         </x-transitions.fade>
