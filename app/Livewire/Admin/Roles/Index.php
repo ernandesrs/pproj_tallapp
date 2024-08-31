@@ -60,20 +60,7 @@ class Index extends Component
     public function deleteItem(int $id): void
     {
         $role = Role::where('id', $id)->firstOrFail(['id', 'name']);
-        $this->dialog()
-            ->warning('Excluir cargo?', 'Você está excluindo um cargo ' . $role->name . ' e isso não pode ser desfeito, confirme para continuar.')
-            ->cancel('Cancelar')
-            ->confirm('Confirmar', 'deleteItemConfirmed', ['role' => $role->id])
-            ->send();
-    }
 
-    /**
-     * Delete item confirmed
-     * @param \App\Models\Role $role
-     * @return void
-     */
-    public function deleteItemConfirmed(Role $role)
-    {
         $this->authorize('delete', $role);
 
         $role->delete();

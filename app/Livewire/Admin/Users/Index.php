@@ -17,7 +17,7 @@ class Index extends Component
      * Model
      * @return \Illuminate\Database\Eloquent\Model
      */
-    static function model(): \Illuminate\Database\Eloquent\Model
+    static function model(): Model
     {
         return new User();
     }
@@ -65,22 +65,6 @@ class Index extends Component
     {
         $user = User::where('id', $id)->firstOrFail(['id', 'first_name', 'last_name']);
 
-        $this->dialog()
-            ->warning('Tem certeza?', 'Você está excluindo o usuário ' . $user->first_name . ' ' . $user->last_name . ', confirme para continuar.')
-            ->cancel('Cancelar')
-            ->confirm('Confirmar', 'deleteConfirmed', [
-                'user' => $user->id
-            ])
-            ->send();
-    }
-
-    /**
-     * Delete confirmed
-     * @param \App\Models\User $user
-     * @return void
-     */
-    public function deleteConfirmed(User $user)
-    {
         $this->authorize('delete', $user);
 
         if (!UserService::delete($user)) {

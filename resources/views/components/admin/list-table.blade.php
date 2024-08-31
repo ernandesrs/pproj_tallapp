@@ -26,8 +26,9 @@
 
         @if (isset($actionDelete) && !is_null($actionDelete))
             @can('delete', $row)
-                <x-button wire:click="deleteItem({{ $row->id }})" text="Excluir" icon="trash" color="rose" flat
-                    sm />
+                <x-admin.delete-confirmation
+                    text="Você está excluindo o item com o <b>ID {{ $row->id }}</b> deste lista, confirme para continuar."
+                    :confirm-param="$row->id" flat sm />
             @endcan
         @endif
     @endinteract
