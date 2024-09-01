@@ -112,9 +112,6 @@
                                             ? $authUser->avatar
                                             : \Storage::url($authUser->avatar))
                                         : null" text="{{ $authUser->first_name }}" xs />
-                                    <div class="truncate max-w-[75px]">
-                                        {{ $authUser->first_name }} {{ $authUser->last_name }}
-                                    </div>
                                 </div>
                             </x-slot:action>
 
