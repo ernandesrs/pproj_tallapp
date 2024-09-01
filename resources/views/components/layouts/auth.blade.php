@@ -9,7 +9,7 @@
     <x-layouts.partials.seo :seo="$seo ?? null" />
 
     <tallstackui:script />
-    @vite('resources/css/front/app.css')
+    @vite('resources/css/auth/app.css')
 </head>
 
 <body class="bg-zinc-100 w-full h-screen flex justify-center items-center flex-wrap">
@@ -17,9 +17,11 @@
 
     <div class="w-full max-w-[775px] p-6">
         <x-card>
-            <h1 class="text-zinc-700 mb-6 text-xl md:text-2xl lg:text-3xl font-medium text-center">
-                {{ $title }}
-            </h1>
+            @if (!empty($title))
+                <h1 class="text-zinc-700 mb-6 text-xl md:text-2xl lg:text-3xl font-medium text-center">
+                    {{ $title }}
+                </h1>
+            @endif
             <div class="flex justify-center">
                 {{ $slot }}
             </div>

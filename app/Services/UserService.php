@@ -3,6 +3,7 @@
 namespace App\Services;
 use App\Interfaces\ServicesInterface;
 use App\Models\User;
+use App\Models\VerificationToken;
 use App\Rules\UserRules;
 
 class UserService implements ServicesInterface
@@ -123,5 +124,34 @@ class UserService implements ServicesInterface
         $model->avatar = null;
 
         return $model->save();
+    }
+
+    /**
+     * Register verify using token
+     * @param array $validated
+     * @return bool
+     */
+    static public function registerVerifyByToken(array $validated): bool
+    {
+        $tokenArray = explode('|', $validated['token']);
+
+        $user = User::where('email', \Str::fromBase64($tokenArray[0]))->first(['id']);
+        if (!$user || !empty($user->email_verified_at)) {
+            return false;
+        }
+
+        $verificationToken = $user->verificationTokens()
+            ->where('to', VerificationToken::TO_REGISTER_VERIFICATION)
+            ->where('token', \Str::fromBase64($tokenArray[1]))
+            ->first();
+        if (!$verificationToken) {
+            return false;
+        }
+
+        $user->email_verified_at = now();
+        $user->save();
+        $verificationToken->delete();
+
+        return true;
     }
 }

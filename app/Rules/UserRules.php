@@ -47,4 +47,24 @@ class UserRules implements RulesInterface
             'avatar' => ['required', 'mimes:png,jpg,jpeg', 'max:1024']
         ];
     }
+
+    /**
+     * Register verification token rules
+     * @return array
+     */
+    static public function registerVerificationTokenRules(): array
+    {
+        return [
+            'token' => [
+                'required',
+                'string',
+                function ($attribute, $value, $fail) {
+                    $tokenToArray = explode('|', $value);
+                    if (count($tokenToArray) != 2) {
+                        $fail("Token is invalid");
+                    }
+                }
+            ]
+        ];
+    }
 }

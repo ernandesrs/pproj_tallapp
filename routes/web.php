@@ -20,6 +20,9 @@ Route::group([
         return redirect(route('front.home'));
     })->name('auth.logout');
 
+    Route::get('/register-verification/{token}', \App\Livewire\Auth\RegisterVerification::class)
+        ->name('auth.registerVerification');
+
 });
 
 Route::group([

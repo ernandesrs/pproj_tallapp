@@ -42,7 +42,7 @@ class RegisterVerificationMail extends Mailable
             markdown: 'mail.register-verification',
             with: [
                 'userFullName' => $this->user->first_name . ' ' . $this->user->last_name,
-                'confirmationLink' => config('app.url') . '/confirm-register?token=' . \Str::toBase64($this->verificationToken->token)
+                'confirmationLink' => config('app.url') . '/auth/register-verification/' . \Str::toBase64($this->user->email) . '|' . \Str::toBase64($this->verificationToken->token)
             ]
         );
     }
