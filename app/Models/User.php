@@ -48,4 +48,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Verification tokens
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function verificationTokens(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(VerificationToken::class);
+    }
 }

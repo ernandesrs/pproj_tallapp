@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Models\User;
+use App\Models\VerificationToken;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -17,7 +18,7 @@ class RegisterVerificationMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public User $user)
+    public function __construct(public User $user, public VerificationToken $verificationToken)
     {
         //
     }
@@ -37,12 +38,11 @@ class RegisterVerificationMail extends Mailable
      */
     public function content(): Content
     {
-        $token = $this->user->email . '|' . \Str::random(24);
         return new Content(
             markdown: 'mail.register-verification',
             with: [
                 'userFullName' => $this->user->first_name . ' ' . $this->user->last_name,
-                'confirmationLink' => config('app.url') . '/confirm-register?token=' . \Str::toBase64($token)
+                'confirmationLink' => config('app.url') . '/confirm-register?token=' . \Str::toBase64($this->verificationToken->token)
             ]
         );
     }

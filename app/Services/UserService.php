@@ -8,6 +8,15 @@ use App\Rules\UserRules;
 class UserService implements ServicesInterface
 {
     /**
+     * User creation/update rules
+     * @return \App\Rules\UserRules
+     */
+    static public function rules(): UserRules
+    {
+        return new UserRules;
+    }
+
+    /**
      * Create a user
      * @param array $validated
      * @param array $options
@@ -21,7 +30,13 @@ class UserService implements ServicesInterface
         }
 
         if ($options['send_verification_link'] ?? false) {
-            \Mail::to($user)->queue(new \App\Mail\RegisterVerificationMail($user));
+            $token = \Str::random(64);
+            $verificationToken = $user->verificationTokens()->create([
+                'to' => \App\Models\VerificationToken::TO_REGISTER_VERIFICATION,
+                'token' => md5($token)
+            ]);
+
+            \Mail::to($user)->queue(new \App\Mail\RegisterVerificationMail($user, $verificationToken));
         }
 
         return $user;
@@ -68,15 +83,6 @@ class UserService implements ServicesInterface
         }
 
         return $model->delete();
-    }
-
-    /**
-     * User creation/update rules
-     * @return \App\Rules\UserRules
-     */
-    static public function rules(): UserRules
-    {
-        return new UserRules;
     }
 
     /**
