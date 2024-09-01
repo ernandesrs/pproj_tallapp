@@ -21,7 +21,7 @@ class UserService implements ServicesInterface
         }
 
         if ($options['send_verification_link'] ?? false) {
-            // send mail
+            \Mail::to($user)->queue(new \App\Mail\RegisterVerificationMail($user));
         }
 
         return $user;
