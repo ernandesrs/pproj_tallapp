@@ -31,13 +31,7 @@ class UserService implements ServicesInterface
         }
 
         if ($options['send_verification_link'] ?? false) {
-            $token = \Str::random(64);
-            $verificationToken = $user->verificationTokens()->create([
-                'to' => \App\Models\VerificationToken::TO_REGISTER_VERIFICATION,
-                'token' => md5($token)
-            ]);
-
-            \Mail::to($user)->queue(new \App\Mail\RegisterVerificationMail($user, $verificationToken));
+            self::sendVerificationLink($user);
         }
 
         return $user;
@@ -124,6 +118,29 @@ class UserService implements ServicesInterface
         $model->avatar = null;
 
         return $model->save();
+    }
+
+    /**
+     * Send verification link
+     * @param \App\Models\User $user
+     * @return bool
+     */
+    static public function sendVerificationLink(User $user): bool
+    {
+        // delete old tokens
+        $user->verificationTokens()
+            ->where('to', VerificationToken::TO_REGISTER_VERIFICATION)
+            ->delete();
+
+        $token = \Str::random(64);
+        $verificationToken = $user->verificationTokens()->create([
+            'to' => VerificationToken::TO_REGISTER_VERIFICATION,
+            'token' => md5($token)
+        ]);
+
+        \Mail::to($user)->queue(new \App\Mail\RegisterVerificationMail($user, $verificationToken));
+
+        return true;
     }
 
     /**

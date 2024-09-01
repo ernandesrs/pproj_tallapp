@@ -178,4 +178,30 @@ class Profile extends Component
         // type, whether you are dealing with multiple or single uploads
         $this->avatar = is_array($this->avatar) ? $collect->toArray() : $collect->first();
     }
+
+    /**
+     * Resend verification link
+     * @return void
+     */
+    public function resendVerificationLink()
+    {
+        $lastToken = $this->user->verificationTokens()->first();
+
+        $minutes = 5;
+        if ($lastToken && $lastToken->created_at >= now()->subMinutes($minutes)) {
+            $this->dialog()
+                ->error('Opa!', 'Um link já foi enviado a menos de ' . $minutes . ' minutos, aguarde.')
+                ->send();
+        } else {
+            if (UserService::sendVerificationLink($this->user)) {
+                $this->dialog()
+                    ->success('Enviado!', 'Um novo link de verificação foi enviado para seu e-mail.')
+                    ->send();
+            } else {
+                $this->dialog()
+                    ->success('Erro!', 'Houve um erro inesperado ao enviar seu novo link, entre em contato conosco.')
+                    ->send();
+            }
+        }
+    }
 }

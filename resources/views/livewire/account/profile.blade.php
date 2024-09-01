@@ -35,7 +35,43 @@
             icon="list-letters"
             title="Detalhes"
             class="col-span-12">
-            Some account details
+
+            <div class="flex items-center gap-6">
+                <div class="flex-1 font-medium">
+                    Registrado em:
+                </div>
+                <div class="flex-1">
+                    {{ $user->created_at->format('d/m/Y H:i') }}
+                </div>
+            </div>
+
+            <div class="flex items-center gap-6">
+                <div class="flex-1 font-medium">
+                    Verificado em:
+                </div>
+                <div class="flex-1">
+                    @php
+                        $verifiedLabel = $user->email_verified_at
+                            ? $user->email_verified_at->format('d/m/Y H:i')
+                            : 'Não verificado';
+                    @endphp
+                    @if ($user->email_verified_at)
+                        {{ $verifiedLabel }}
+                    @else
+                        <x-badge position="left" icon="info-circle" text="{{ $verifiedLabel }}" color="amber" />
+                    @endif
+                </div>
+            </div>
+            @empty($user->email_verified_at)
+                <div class="flex-1 mt-2">
+                    <x-link wire:target="resendVerificationLink" wire:click="resendVerificationLink"
+                        wire:loading.class='pointer-events-none animate-pulse' href="#"
+                        text="Solicitar novo link de verificação"
+                        icon="arrow-up-right" position="right"
+                        color="secondary" underline />
+                </div>
+            @endempty
+
         </x-admin.content-card>
 
         @if (!\Auth::user()->hasRole(\App\Enums\Roles\RoleEnum::SUPER))
