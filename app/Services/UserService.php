@@ -62,6 +62,32 @@ class UserService implements ServicesInterface
     }
 
     /**
+     * Update password
+     * @param array $validated
+     * @param \App\Models\User $user
+     * @param bool $hasPasswordResetToken
+     * @return bool
+     */
+    static public function updatePassword(array $validated, User $user, bool $hasPasswordResetToken = false): bool
+    {
+        if (
+            !$user->update([
+                'password' => $validated['password']
+            ])
+        ) {
+            return false;
+        }
+
+        if ($hasPasswordResetToken) {
+            $user->verificationTokens()
+                ->where('to', VerificationToken::TO_PASSWORD_RESET)
+                ->delete();
+        }
+
+        return true;
+    }
+
+    /**
      * Delete user
      * @param \Illuminate\Database\Eloquent\Model $model
      * @param array $options

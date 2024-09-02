@@ -2,6 +2,8 @@
 
 namespace App\Rules;
 use App\Interfaces\RulesInterface;
+use App\Models\User;
+use App\Models\VerificationToken;
 
 class UserRules implements RulesInterface
 {
@@ -17,7 +19,7 @@ class UserRules implements RulesInterface
             'username' => ['required', 'string', 'max:25', 'unique:users,username'],
             'email' => ['required', 'email', 'unique:users,email'],
             'gender' => ['required', 'string', \Illuminate\Validation\Rule::in(['n', 'f', 'm'])],
-            'password' => ['required', 'string', 'confirmed'],
+            ...self::passwordRules()
         ];
     }
 
@@ -35,6 +37,17 @@ class UserRules implements RulesInterface
         unset($rules['email']);
 
         return $rules;
+    }
+
+    /**
+     * Password rules
+     * @return array
+     */
+    static public function passwordRules(): array
+    {
+        return [
+            'password' => ['required', 'string', 'confirmed'],
+        ];
     }
 
     /**
@@ -62,6 +75,66 @@ class UserRules implements RulesInterface
                     $tokenToArray = explode('|', $value);
                     if (count($tokenToArray) != 2) {
                         $fail("Token is invalid");
+                        return;
+                    }
+
+                    $emailFromToken = \Str::fromBase64($tokenToArray[0]);
+                    $decryptedToken = \Str::fromBase64($tokenToArray[1]);
+
+                    $user = User::where('email', $emailFromToken)->first(['id']);
+                    if (!$user) {
+                        $fail("Token is invalid");
+                        return;
+                    }
+
+                    if (
+                        $user->verificationTokens()
+                            ->where('to', VerificationToken::TO_REGISTER_VERIFICATION)
+                            ->where('token', $decryptedToken)
+                            ->count() == 0
+                    ) {
+                        $fail("Token is invalid");
+                        return;
+                    }
+                }
+            ]
+        ];
+    }
+
+    /**
+     * Password reset token rules
+     * @return array
+     */
+    static public function passwordResetTokenRules(): array
+    {
+        return [
+            'token' => [
+                'required',
+                'string',
+                function ($attribute, $value, $fail) {
+                    $tokenToArray = explode('|', $value);
+                    if (count($tokenToArray) != 2) {
+                        $fail("Token is invalid");
+                        return;
+                    }
+
+                    $emailFromToken = \Str::fromBase64($tokenToArray[0]);
+                    $decryptedToken = \Str::fromBase64($tokenToArray[1]);
+
+                    $user = User::where('email', $emailFromToken)->first(['id']);
+                    if (!$user) {
+                        $fail("Token is invalid");
+                        return;
+                    }
+
+                    if (
+                        $user->verificationTokens()
+                            ->where('to', VerificationToken::TO_PASSWORD_RESET)
+                            ->where('token', $decryptedToken)
+                            ->count() == 0
+                    ) {
+                        $fail("Token is invalid");
+                        return;
                     }
                 }
             ]

@@ -6,7 +6,7 @@ Route::get('/', \App\Livewire\Front\Home::class)->name('front.home');
 
 Route::get('/mailable', function () {
     // $user = \App\Models\User::first();
-    return new \App\Mail\PasswordResetMail('Usuário Nome', 'usuariomail@mail.com', 'jfalkjfçalskfjadklsfjkasld');
+    // return new \App\Mail\PasswordResetMail('Usuário Nome', 'usuariomail@mail.com', 'jfalkjfçalskfjadklsfjkasld');
 });
 
 Route::group([
@@ -21,6 +21,7 @@ Route::group([
     })->name('auth.logout');
 
     Route::get('/forgot-password', \App\Livewire\Auth\ForgotPassword::class)->name('auth.forgotPassword');
+    Route::get('/password-reset/{token}', \App\Livewire\Auth\PasswordReset::class)->name('auth.passwordReset');
 
     Route::get('/register-verification/{token}', \App\Livewire\Auth\RegisterVerification::class)
         ->name('auth.registerVerification');
