@@ -20,6 +20,8 @@ Route::group([
         return redirect(route('front.home'));
     })->name('auth.logout');
 
+    Route::get('/register', \App\Livewire\Auth\Register::class)->name('auth.register');
+
     Route::get('/forgot-password', \App\Livewire\Auth\ForgotPassword::class)->name('auth.forgotPassword');
     Route::get('/password-reset/{token}', \App\Livewire\Auth\PasswordReset::class)->name('auth.passwordReset');
 

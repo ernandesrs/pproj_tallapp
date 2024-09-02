@@ -10,12 +10,6 @@
 </x-slot:footer>
 
 <div class="w-full max-w-[425px]">
-    @include('livewire.auth.social-buttons', [
-        'google' => false,
-        'facebook' => false,
-        'github' => false,
-    ])
-
     <form wire:submit='requestRecoveryLink' class="grid grid-cols-12 gap-6">
         <div class="col-span-12">
             <x-input wire:model='email' label="E-mail *" placeholder="E-mail" />

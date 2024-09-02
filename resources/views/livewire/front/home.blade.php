@@ -5,7 +5,7 @@
             <x-front.clickable href="{{ route('auth.login') }}">
                 Login
             </x-front.clickable>
-            <x-front.clickable>
+            <x-front.clickable href="{{ route('auth.register') }}">
                 Register
             </x-front.clickable>
         @else
