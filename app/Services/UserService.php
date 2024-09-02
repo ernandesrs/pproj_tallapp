@@ -171,4 +171,32 @@ class UserService implements ServicesInterface
 
         return true;
     }
+
+    /**
+     * Send recovery link
+     * @param User $user
+     * @return bool
+     */
+    static public function sendRecoveryLink(User $user): bool
+    {
+        // delete old tokens
+        $user->verificationTokens()
+            ->where('to', VerificationToken::TO_PASSWORD_RESET)
+            ->delete();
+
+        $verificationToken = $user->verificationTokens()->create([
+            'token' => md5(\Str::random(64)),
+            'to' => VerificationToken::TO_PASSWORD_RESET
+        ]);
+
+        if (!$verificationToken) {
+            return false;
+        }
+
+        \Mail::to($user)->queue(
+            new \App\Mail\PasswordResetMail("$user->first_name $user->last_name", $user->email, $verificationToken->token)
+        );
+
+        return true;
+    }
 }

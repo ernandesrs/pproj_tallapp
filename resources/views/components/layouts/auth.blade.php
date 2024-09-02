@@ -13,6 +13,7 @@
 </head>
 
 <body class="bg-zinc-100 w-full h-screen flex justify-center items-center flex-wrap">
+    <x-dialog />
     <x-toast />
 
     <div class="w-full max-w-[775px] p-6">

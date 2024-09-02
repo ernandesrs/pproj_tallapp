@@ -4,7 +4,7 @@
 
 <x-slot:footer>
     <div class="flex justify-center gap-6 w-full">
-        <x-link href="#" text="Esquecia a senha" icon="arrow-up-right" />
+        <x-link wire:navigate href="{{ route('auth.forgotPassword') }}" text="Esquecia a senha" icon="arrow-up-right" />
         <x-link href="#" text="Criar conta" icon="user-plus" />
     </div>
 </x-slot:footer>

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Account;
 
+use App\Models\VerificationToken;
 use App\Services\UserService;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
@@ -185,7 +186,7 @@ class Profile extends Component
      */
     public function resendVerificationLink()
     {
-        $lastToken = $this->user->verificationTokens()->first();
+        $lastToken = $this->user->verificationTokens()->where('to', VerificationToken::TO_REGISTER_VERIFICATION)->first();
 
         $minutes = 5;
         if ($lastToken && $lastToken->created_at >= now()->subMinutes($minutes)) {
