@@ -31,13 +31,7 @@ class UserPolicy extends BasePolicy
      */
     public function update(User $user, Model $model): bool
     {
-        if (
-            // can't edit yourself here
-            $user->id == $model->id ||
-
-                // only super users can edit super users
-            (!$this->isSuperUser($user) && $this->isSuperUser($model))
-        ) {
+        if (!self::checkIfEditingYourselfAndIfModelIsSuper($user, $model)) {
             return false;
         }
 
@@ -59,13 +53,7 @@ class UserPolicy extends BasePolicy
      */
     public function delete(User $user, Model $model): bool
     {
-        if (
-            // can't delete yourself
-            $user->id == $model->id ||
-
-                // only super users can delete super users
-            (!$this->isSuperUser($user) && $this->isSuperUser($model))
-        ) {
+        if (!self::checkIfEditingYourselfAndIfModelIsSuper($user, $model)) {
             return false;
         }
 
@@ -103,5 +91,26 @@ class UserPolicy extends BasePolicy
         }
 
         return $user->can(static::permissionsEnumClass()::EDIT_ROLE->value);
+    }
+
+    /**
+     * Check if editing yourself and if model is super user
+     * @param \App\Models\User $user
+     * @param \Illuminate\Database\Eloquent\Model $model
+     * @return bool
+     */
+    private function checkIfEditingYourselfAndIfModelIsSuper(User $user, Model $model)
+    {
+        if (
+            // can't edit yourself here
+            $user->id == $model->id ||
+
+                // only super users can edit super users
+            (!$this->isSuperUser($user) && $this->isSuperUser($model))
+        ) {
+            return false;
+        }
+
+        return true;
     }
 }

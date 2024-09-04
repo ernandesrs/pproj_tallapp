@@ -28,12 +28,12 @@ enum RolePermissionsEnum: string
     function label(): string
     {
         return match ($this) {
-            static::VIEW_ANY => 'Ver todos',
-            static::VIEW => 'Ver um',
-            static::CREATE => 'Criar',
-            static::UPDATE => 'Editar',
-            static::DELETE => 'Deletar',
-            static::DELETE_MANY => 'Deletar vários',
+            static::VIEW_ANY => 'Ver todos cargos',
+            static::VIEW => 'Ver um cargo',
+            static::CREATE => 'Criar cargo',
+            static::UPDATE => 'Editar cargo',
+            static::DELETE => 'Deletar cargo',
+            static::DELETE_MANY => 'Deletar vários cargos',
         };
     }
 

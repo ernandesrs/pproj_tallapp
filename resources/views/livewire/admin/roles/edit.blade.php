@@ -19,20 +19,20 @@
         </x-admin.content-card>
 
         <x-admin.content-card
-            title="Permissões deste cargo"
+            title="Permissões de {{ $role->display_name }}"
+            subtitle="Revogue ou atribua permissões ao cargo de {{ $role->display_name }}."
             class="col-span-12">
             @if ($role->name == \App\Enums\Roles\RoleEnum::SUPER->value)
                 <x-alert icon="lock-open"
                     text="Este cargo possui todas as permissões. Muito cuidado ao atribui-lo a um usuário."
                     color="secondary" outline />
             @else
-                <div class="grid grid-cols-12 gap-6">
+                <div class="grid grid-cols-12 gap-3">
                     @foreach (\App\Models\Permission::avaiablePermissions() as $key => $group)
                         <div class="col-span-12 flex items-center gap-2">
-                            <div><x-icon name="arrow-right" class="w-8" /></div>
                             <div class="w-full text-base md:text-lg truncate">{{ $group[0]->permissionsLabel() }}</div>
                         </div>
-                        <div class="col-span-12 flex flex-wrap gap-6">
+                        <div class="col-span-12 flex flex-wrap gap-y-2 gap-x-2 mb-3">
                             @foreach ($group as $permission)
                                 @php
                                     $hasPermission = $role->hasPermissionTo($permission);

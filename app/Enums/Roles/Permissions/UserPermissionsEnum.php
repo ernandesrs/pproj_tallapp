@@ -16,8 +16,10 @@ enum UserPermissionsEnum: string
     case CREATE = 'create_user';
 
     case UPDATE = 'update_user';
+    case UPDATE_ADMIN = 'update_admin';
 
     case DELETE = 'delete_user';
+    case DELETE_ADMIN = 'delete_admin';
 
     case FORCE_DELETE = 'force_delete_user';
 
@@ -34,14 +36,19 @@ enum UserPermissionsEnum: string
     function label(): string
     {
         return match ($this) {
-            static::VIEW_ANY => 'Ver todos',
-            static::VIEW => 'Ver um',
-            static::CREATE => 'Criar',
-            static::UPDATE => 'Editar',
-            static::DELETE => 'Deletar',
-            static::FORCE_DELETE => 'Exclusão forçada',
-            static::DELETE_MANY => 'Deletar vários',
-            static::RESTORE => 'Restaurar',
+            static::VIEW_ANY => 'Ver todos usuários',
+            static::VIEW => 'Ver um usuário',
+            static::CREATE => 'Criar usuário',
+
+            static::UPDATE => 'Editar usuário',
+            static::UPDATE_ADMIN => 'Editar administrador',
+
+            static::DELETE => 'Deletar usuário',
+            static::DELETE_ADMIN => 'Deletar administrador',
+
+            static::FORCE_DELETE => 'Exclusão forçada de usuário',
+            static::DELETE_MANY => 'Deletar vários usuários',
+            static::RESTORE => 'Restaurar usuário',
             static::EDIT_ROLE => 'Editar cargo do usuário',
         };
     }
