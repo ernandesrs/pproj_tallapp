@@ -35,9 +35,17 @@
             <div
                 class="bg-zinc-100 border dark:bg-zinc-800 dark:border-zinc-700 mb-5 rounded-md px-6 py-4">
                 <div class="mb-1">Filtros extras</div>
-                <div class="grid cols-12 gap-3">
+                <div class="grid grid-cols-12 gap-3">
 
-                    jkla
+                    @foreach (static::filterSelects() as $select)
+                        @php
+                            $select = (object) $select;
+                        @endphp
+                        <div class="col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2">
+                            <x-select.native wire:model.live="selects.{{ $select->index }}" :options="$select->options"
+                                label="{{ $select->label }}" select="label:label|value:value" />
+                        </div>
+                    @endforeach
 
                 </div>
             </div>

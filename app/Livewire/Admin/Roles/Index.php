@@ -30,6 +30,11 @@ class Index extends Component
         return 'name,display_name';
     }
 
+    static public function filterSelects(): array
+    {
+        return [];
+    }
+
     /**
      * Render view
      * @return mixed

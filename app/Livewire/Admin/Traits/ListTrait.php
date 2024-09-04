@@ -3,33 +3,17 @@
 namespace App\Livewire\Admin\Traits;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use League\CommonMark\Node\Inline\AbstractInline;
-use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 
 trait ListTrait
 {
-    use WithPagination;
+    use WithPagination, Filter;
 
     /**
      * Simple list: using table and system filter from TallstackUI
      * @var bool
      */
     public bool $simpleList = false;
-
-    /**
-     * Limit of list
-     * @var int
-     */
-    #[Url(as: 'qtd', nullable: false)]
-    public int $quantity = 15;
-
-    /**
-     * Search term
-     * @var null|string
-     */
-    #[Url(as: 's', nullable: false)]
-    public null|string $search = null;
 
     /**
      * Model
@@ -57,6 +41,14 @@ trait ListTrait
     function getItems()
     {
         $model = self::model()->query();
+
+        if (count($this->selects)) {
+            foreach ($this->selects as $key => $select) {
+                if (!empty($select)) {
+                    $model = $model->where($key, $select);
+                }
+            }
+        }
 
         if (self::searchables()) {
             $model = $model->when($this->search, function (Builder $query) {

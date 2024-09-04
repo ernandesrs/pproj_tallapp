@@ -31,6 +31,22 @@ class Index extends Component
         return 'first_name,last_name,username,email';
     }
 
+    static public function filterSelects(): array
+    {
+        return [
+            [
+                'index' => 'gender',
+                'label' => 'Gênero',
+                'options' => [
+                    ['label' => 'Todos', 'value' => ''],
+                    ['label' => 'Não definido', 'value' => 'n'],
+                    ['label' => 'Feminino', 'value' => 'f'],
+                    ['label' => 'Masculino', 'value' => 'm'],
+                ]
+            ]
+        ];
+    }
+
     /**
      * Mount
      * @return void
