@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Traits;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use League\CommonMark\Node\Inline\AbstractInline;
+use Livewire\Attributes\Url;
 use Livewire\WithPagination;
 
 trait ListTrait
@@ -11,15 +12,23 @@ trait ListTrait
     use WithPagination;
 
     /**
+     * Simple list: using table and system filter from TallstackUI
+     * @var bool
+     */
+    public bool $simpleList = false;
+
+    /**
      * Limit of list
      * @var int
      */
+    #[Url(as: 'qtd', nullable: false)]
     public int $quantity = 15;
 
     /**
      * Search term
      * @var null|string
      */
+    #[Url(as: 's', nullable: false)]
     public null|string $search = null;
 
     /**
