@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Policies;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -134,5 +135,15 @@ abstract class BasePolicy
     public function isSuperUser(Model|User $user)
     {
         return $user->hasRole(\App\Enums\Roles\RoleEnum::SUPER);
+    }
+
+    /**
+     * Check if user is admin
+     * @param \Illuminate\Database\Eloquent\Model|\App\Models\User $user
+     * @return bool
+     */
+    public function isAdminUser(Model|User $user): bool
+    {
+        return $user->hasAnyRole(Role::all(['id']));
     }
 }

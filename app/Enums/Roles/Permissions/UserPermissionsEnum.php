@@ -27,7 +27,7 @@ enum UserPermissionsEnum: string
 
     case RESTORE = 'restore_user';
 
-    case EDIT_ROLE = 'edit_user_roles';
+    // case EDIT_ROLE = 'edit_user_roles';
 
     /**
      * User permission label

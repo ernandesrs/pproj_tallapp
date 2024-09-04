@@ -31,11 +31,30 @@ class UserPolicy extends BasePolicy
      */
     public function update(User $user, Model $model): bool
     {
-        if (!self::checkIfEditingYourselfAndIfModelIsSuper($user, $model)) {
+        if (
+                // If the 'model' is admin, check if 'user' can edit 'model'
+            (self::isAdminUser($model) && !self::updateAdmin($user, $model)) ||
+            !self::checkIfEditingYourselfAndIfModelIsSuper($user, $model)
+        ) {
             return false;
         }
 
         return parent::update($user, $model);
+    }
+
+    /**
+     * Check if user can update admin
+     * @param \App\Models\User $user
+     * @param \Illuminate\Database\Eloquent\Model $model
+     * @return bool
+     */
+    public function updateAdmin(User $user, Model $model): bool
+    {
+        if (!self::checkIfEditingYourselfAndIfModelIsSuper($user, $model)) {
+            return false;
+        }
+
+        return $user->hasPermissionTo(self::permissionsEnumClass()::UPDATE_ADMIN);
     }
 
     /**
@@ -53,11 +72,30 @@ class UserPolicy extends BasePolicy
      */
     public function delete(User $user, Model $model): bool
     {
-        if (!self::checkIfEditingYourselfAndIfModelIsSuper($user, $model)) {
+        if (
+                // If the 'model' is admin, check if 'user' can delete 'model'
+            (self::isAdminUser($model) && !self::deleteAdmin($user, $model)) ||
+            !self::checkIfEditingYourselfAndIfModelIsSuper($user, $model)
+        ) {
             return false;
         }
 
         return parent::delete($user, $model);
+    }
+
+    /**
+     * Check if user can delete admin
+     * @param \App\Models\User $user
+     * @param \Illuminate\Database\Eloquent\Model $model
+     * @return bool
+     */
+    public function deleteAdmin(User $user, Model $model): bool
+    {
+        if (!self::checkIfEditingYourselfAndIfModelIsSuper($user, $model)) {
+            return false;
+        }
+
+        return $user->hasPermissionTo(self::permissionsEnumClass()::DELETE_ADMIN);
     }
 
     /**
@@ -86,11 +124,12 @@ class UserPolicy extends BasePolicy
             return false;
         }
 
-        if ($this->isSuperUser($user)) {
-            return true;
-        }
+        return $this->isSuperUser($user);
+        // if ($this->isSuperUser($user)) {
+        //     return true;
+        // }
 
-        return $user->can(static::permissionsEnumClass()::EDIT_ROLE->value);
+        // return $user->can(static::permissionsEnumClass()::EDIT_ROLE->value);
     }
 
     /**

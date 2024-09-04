@@ -72,8 +72,8 @@
                 </div>
             </x-admin.content-card>
 
-            @can('updateUserRoles', $user)
-                <x-admin.content-card title="Cargos" class="col-span-12">
+            <x-admin.content-card title="Cargos" class="col-span-12">
+                @can('updateUserRoles', $user)
                     <x-alert icon="shield-exclamation" color="amber" title="Importante!"
                         text="Muita atenção ao promover usuários, leia com cuidado as informações nas telas confirmação antes de confirmar."
                         outline />
@@ -128,8 +128,12 @@
                             @endforeach
                         </div>
                     </div>
-                </x-admin.content-card>
-            @endcan
+                @else
+                    @foreach ($user->roles()->get() as $role)
+                        <x-badge text="{{ $role->display_name }}" color="emerald" />
+                    @endforeach
+                @endcan
+            </x-admin.content-card>
         </div>
     </div>
 
