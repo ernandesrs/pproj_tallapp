@@ -18,25 +18,14 @@
 @if (!$this->simpleList)
     <x-admin.list.filter :$quantities />
 
-    <x-admin.list.custom :$rows />
+    <x-admin.list.custom :$headers :$rows :action-edit="$actionEdit" :action-delete="$actionDelete" />
 @else
     <x-table :$headers :$rows :quantity="[5, 10, 15, 20]" filter paginate persistent loading>
         @interact('column_action', $row, $actionEdit, $actionDelete)
-            @if (isset($actionEdit) && !is_null($actionEdit))
-                @can('update', $row)
-                    <x-button wire:navigate href="{{ $actionEdit($row) }}" text="Editar"
-                        icon="edit"
-                        color="primary" flat sm />
-                @endcan
-            @endif
-
-            @if (isset($actionDelete) && !is_null($actionDelete))
-                @can('delete', $row)
-                    <x-admin.delete-confirmation
-                        dialog-text="Você está excluindo o item com o <b>ID {{ $row->id }}</b> deste lista, confirme para continuar."
-                        :confirm-param="$row->id" flat sm />
-                @endcan
-            @endif
+            @include('components.admin.list.actions', [
+                'actionEdit' => $actionEdit,
+                'actionDelete' => $actionDelete,
+            ])
         @endinteract
     </x-table>
 @endif

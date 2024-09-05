@@ -16,7 +16,7 @@ trait Filter
      * Search term
      * @var null|string
      */
-    #[Url(except: '', nullable: false)]
+    #[Url(except: null)]
     public null|string $search = null;
 
     /**
@@ -24,7 +24,7 @@ trait Filter
      *
      * @var array
      */
-    #[Url(except: '', nullable: false)]
+    #[Url(except: null)]
     public array $selects = [];
 
     /**

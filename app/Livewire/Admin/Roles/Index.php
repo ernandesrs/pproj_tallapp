@@ -37,7 +37,12 @@ class Index extends Component
 
     static public function filterPeriods(): array
     {
-        return [];
+        return [
+            [
+                'index' => 'created_at',
+                'label' => 'Data de registro'
+            ]
+        ];
     }
 
     /**

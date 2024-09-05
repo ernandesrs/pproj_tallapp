@@ -76,8 +76,8 @@ class Index extends Component
         return view('livewire..admin.users.index', [
             'headers' => [
                 ['index' => 'id', 'label' => 'ID'],
-                ['index' => 'first_name', 'label' => 'Nome'],
-                ['index' => 'last_name', 'label' => 'Sobrenome'],
+                ['view' => 'livewire.admin.users.partials.avatar', 'label' => 'Avatar'],
+                ['callable' => fn($row) => $row->first_name . ' ' . $row->last_name, 'label' => 'Nome'],
                 ['index' => 'email', 'label' => 'E-mail'],
                 ['index' => 'action', 'label' => 'Ações']
             ],

@@ -1,5 +1,5 @@
 @props([
-    'quantities' => [1, 2, 3],
+    'quantities' => [5, 10, 15],
 ])
 
 <div
