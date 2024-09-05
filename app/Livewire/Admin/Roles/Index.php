@@ -35,7 +35,7 @@ class Index extends Component
         return [];
     }
 
-    static public function filterBetweenDates(): array
+    static public function filterPeriods(): array
     {
         return [];
     }

@@ -47,12 +47,20 @@ class Index extends Component
         ];
     }
 
-    static public function filterBetweenDates(): array
+    static public function filterPeriods(): array
     {
         return [
             [
                 'index' => 'created_at',
                 'label' => 'Data de registro',
+            ],
+            [
+                'index' => 'updated_at',
+                'label' => 'Data de atualização',
+            ],
+            [
+                'index' => 'email_verified_at',
+                'label' => 'Data de verificação',
             ]
         ];
     }

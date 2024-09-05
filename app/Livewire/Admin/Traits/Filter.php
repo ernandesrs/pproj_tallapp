@@ -23,9 +23,28 @@ trait Filter
     public array $selects = [];
 
     #[Url()]
-    public array $betweenDates = [];
+    public array $periods = [];
 
     abstract static public function filterSelects(): array;
 
-    abstract static public function filterBetweenDates(): array;
+    abstract static public function filterPeriods(): array;
+
+    /**
+     * Check if is filtring
+     * @return bool
+     */
+    public function isFiltering()
+    {
+        return count($this->selects) || count($this->periods) ? true : false;
+    }
+
+    /**
+     * Clear filters
+     * @return void
+     */
+    public function clearFilters()
+    {
+        $this->selects = [];
+        $this->periods = [];
+    }
 }

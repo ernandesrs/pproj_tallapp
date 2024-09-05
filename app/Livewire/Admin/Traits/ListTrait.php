@@ -50,10 +50,10 @@ trait ListTrait
             }
         }
 
-        if (count($this->betweenDates)) {
-            foreach ($this->betweenDates as $key => $between) {
-                if (!empty($between['start']) && !empty($between['end'])) {
-                    $model = $model->whereBetween($key, [$between['start'], $between['end']]);
+        if (count($this->periods)) {
+            foreach ($this->periods as $key => $period) {
+                if (!empty($period['start']) && !empty($period['end'])) {
+                    $model = $model->whereBetween($key, [$period['start'], $period['end']]);
                 }
             }
         }
