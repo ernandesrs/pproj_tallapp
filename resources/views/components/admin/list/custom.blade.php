@@ -5,19 +5,20 @@
     'actionDelete' => false,
 ])
 
-<div class="border px-6 py-4 dark:border-zinc-700 rounded-md">
+<div class="border dark:border-zinc-700 rounded-md w-full border-1 border-zinc-300 overflow-x-auto">
     @if ($rows->count())
-        <table>
+        <table
+            class="table-auto w-full bg-zinc-100 dark:bg-zinc-700 text-left text-zinc-600 rounded-md overflow-hidden dark:text-zinc-200">
             <thead>
-                <tr>
+                <tr class="bg-zinc-100 uppercase border-b text-sm font-medium border-b-zinc-200 dark:bg-zinc-700 dark:border-b-zinc-600">
                     @foreach ($headers as $header)
-                        <th>{{ $header['label'] }}</th>
+                        <td class="px-3 py-4">{{ $header['label'] }}</td>
                     @endforeach
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="text-zinc-400">
                 @foreach ($rows as $row)
-                    <tr>
+                    <tr class="border-b border-b-zinc-200 bg-zinc-50 dark:border-b-zinc-700 dark:bg-zinc-800">
                         @foreach ($headers as $header)
                             @php
                                 $index = $header['index'] ?? null;
@@ -25,7 +26,7 @@
                                 $callable = $header['callable'] ?? null;
                                 $hasActions = $index == 'action';
                             @endphp
-                            <td>
+                            <td class="px-3 py-2">
                                 @if (($index && $index != 'action') || $callable)
                                     {{ $index ? $row->$index : $callable($row) }}
                                 @elseif ($view)
