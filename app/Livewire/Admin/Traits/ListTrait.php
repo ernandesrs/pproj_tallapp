@@ -40,32 +40,43 @@ trait ListTrait
      */
     function getItems()
     {
+        $validData = $this->validateFilters();
+
+        $selects = $validData['selects'] ?? [];
+        $periods = $validData['periods'] ?? [];
+        $search = $validData['search'] ?? null;
+        $quantity = $validData['quantity'] ?? 10;
+
         $model = self::model()->query();
 
-        if (count($this->selects)) {
-            foreach ($this->selects as $key => $select) {
+        // Apply selects filter
+        if (count($selects)) {
+            $selects = $validData['selects'];
+
+            foreach ($selects as $key => $select) {
                 if (!empty($select)) {
                     $model = $model->where($key, $select);
                 }
             }
         }
 
-        if (count($this->periods)) {
-            foreach ($this->periods as $key => $period) {
+        // Apply perios filters
+        if (count($periods)) {
+            foreach ($periods as $key => $period) {
                 if (!empty($period['start']) && !empty($period['end'])) {
-                    $model = $model->whereBetween($key, [$period['start'], $period['end']]);
+                    $model = $model->orWhereBetween($key, [$period['start'], $period['end']]);
                 }
             }
         }
 
         if (self::searchables()) {
-            $model = $model->when($this->search, function (Builder $query) {
-                return $query->whereRaw('MATCH(' . self::searchables() . ') AGAINST(? IN BOOLEAN MODE)', $this->search);
+            $model = $model->when($search, function (Builder $query) use ($search) {
+                return $query->whereRaw('MATCH(' . self::searchables() . ') AGAINST(? IN BOOLEAN MODE)', $search);
             });
         }
 
         return $model
-            ->paginate($this->quantity)
+            ->paginate($quantity)
             ->withQueryString();
     }
 }

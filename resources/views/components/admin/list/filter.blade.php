@@ -1,5 +1,5 @@
 @props([
-    'quantities' => [5, 10, 15],
+    'quantities' => [1, 2, 3],
 ])
 
 <div
@@ -21,7 +21,7 @@
             <x-button x-show="!showMoreFilters" x-on:click="showMoreFilters=!showMoreFilters" icon="filter"
                 color="zinc" />
             <x-button x-show="showMoreFilters" x-on:click="showMoreFilters=!showMoreFilters" icon="filter"
-                color="primary" />
+                color="primary" text="Ocultar filtros" />
         </div>
     </div>
 
@@ -29,26 +29,32 @@
 
         x-show="showMoreFilters"
 
+        x-transition:enter="duration-100 ease-in-out"
+        x-transition:enter-start="opacity-0 -translate-y-2"
+        x-transition:enter-end="opacity-100 -translate-y-0"
+
+        x-transition:leave="duration-75 ease-in"
+        x-transition:leave-start="opacity-100 -translate-y-0"
+        x-transition:leave-end="opacity-0 -translate-y-2"
+
         class="mb-4">
         <div
             class="bg-zinc-100 border dark:bg-zinc-800 dark:border-zinc-700 mb-5 rounded-md px-6 py-4">
             <div class="flex items-center gap-x-4 py-2 mb-2">
                 Filtros extras
-                @if ($this->isFiltering())
-                    <x-button wire:click="clearFilters" icon="filter-x" color="rose" sm text="Limpar filtros" />
-                @endif
             </div>
-            <div class="grid grid-cols-12 gap-3">
+            <div class="grid grid-cols-12 gap-3 mb-4">
 
                 {{-- selects --}}
                 @foreach (static::filterSelects() as $select)
                     @php
                         $select = (object) $select;
                     @endphp
-                    <div class="col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2">
-                        <x-select.native wire:model.live="selects.{{ $select->index }}" :options="$select->options"
+
+                    <x-admin.list.filter.container>
+                        <x-select.native wire:model="selects.{{ $select->index }}" :options="[['label' => 'Nenhum', 'value' => null], ...$select->options]"
                             label="{{ $select->label }}" select="label:label|value:value" />
-                    </div>
+                    </x-admin.list.filter.container>
                 @endforeach
 
                 {{-- between datas --}}
@@ -56,15 +62,21 @@
                     @php
                         $period = (object) $period;
                     @endphp
-                    <div class="col-span-6 sm:col-span-4 md:col-span-3 lg:col-span-2 flex flex-col gap-y-3">
-                        <x-input type="date" wire:model.live="periods.{{ $period->index }}.start"
-                            label="{{ $period->label }}(Início)" />
+                    <x-admin.list.filter.container title="Filtro por período({{ $period->label }})">
+                        <x-input type="date" wire:model="periods.{{ $period->index }}.start"
+                            label="De:" />
 
-                        <x-input type="date" wire:model.live="periods.{{ $period->index }}.end"
-                            label="{{ $period->label }}(Fim)" />
-                    </div>
+                        <x-input type="date" wire:model="periods.{{ $period->index }}.end"
+                            label="Até:" />
+                    </x-admin.list.filter.container>
                 @endforeach
 
+            </div>
+            <div class="flex justify-center items-center gap-x-3">
+                @if ($this->isFiltering())
+                    <x-button wire:click="clearFilters" icon="filter-x" color="rose" text="Limpar filtros" />
+                @endif
+                <x-button wire:click="applyFilters" icon="filter-check" text="Aplicar filtro" />
             </div>
         </div>
     </div>

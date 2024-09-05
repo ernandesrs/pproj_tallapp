@@ -38,7 +38,6 @@ class Index extends Component
                 'index' => 'gender',
                 'label' => 'Gênero',
                 'options' => [
-                    ['label' => 'Todos', 'value' => ''],
                     ['label' => 'Não definido', 'value' => 'n'],
                     ['label' => 'Feminino', 'value' => 'f'],
                     ['label' => 'Masculino', 'value' => 'm'],
@@ -53,14 +52,6 @@ class Index extends Component
             [
                 'index' => 'created_at',
                 'label' => 'Data de registro',
-            ],
-            [
-                'index' => 'updated_at',
-                'label' => 'Data de atualização',
-            ],
-            [
-                'index' => 'email_verified_at',
-                'label' => 'Data de verificação',
             ]
         ];
     }

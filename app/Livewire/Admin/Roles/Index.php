@@ -41,6 +41,15 @@ class Index extends Component
     }
 
     /**
+     * Mount
+     * @return void
+     */
+    public function mount()
+    {
+        $this->simpleList = true;
+    }
+
+    /**
      * Render view
      * @return mixed
      */
