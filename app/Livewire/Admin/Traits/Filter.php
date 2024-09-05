@@ -10,7 +10,7 @@ trait Filter
      * @var int
      */
     #[Url()]
-    public int $quantity = 15;
+    public int $quantity = 5;
 
     /**
      * Search term

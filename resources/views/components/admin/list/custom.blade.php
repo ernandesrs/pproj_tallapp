@@ -5,12 +5,13 @@
     'actionDelete' => false,
 ])
 
-<div class="border dark:border-zinc-700 rounded-md w-full border-1 border-zinc-300 overflow-x-auto">
-    @if ($rows->count())
+@if ($rows->count())
+    <div class="border dark:border-zinc-700 rounded-md w-full border-1 border-zinc-300 overflow-x-auto">
         <table
             class="table-auto w-full bg-zinc-100 dark:bg-zinc-700 text-left text-zinc-600 rounded-md overflow-hidden dark:text-zinc-200">
             <thead>
-                <tr class="bg-zinc-100 uppercase border-b text-sm font-medium border-b-zinc-200 dark:bg-zinc-700 dark:border-b-zinc-600">
+                <tr
+                    class="bg-zinc-100 uppercase border-b text-sm font-medium border-b-zinc-200 dark:bg-zinc-700 dark:border-b-zinc-600">
                     @foreach ($headers as $header)
                         <td class="px-3 py-4">{{ $header['label'] }}</td>
                     @endforeach
@@ -43,7 +44,11 @@
                 @endforeach
             </tbody>
         </table>
-    @else
-        Sem items
-    @endif
-</div>
+    </div>
+
+    <div class="mt-3">
+        {{ $rows->onEachSide(0)->links() }}
+    </div>
+@else
+    Sem items
+@endif
