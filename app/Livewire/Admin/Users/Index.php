@@ -47,6 +47,16 @@ class Index extends Component
         ];
     }
 
+    static public function filterBetweenDates(): array
+    {
+        return [
+            [
+                'index' => 'created_at',
+                'label' => 'Data de registro',
+            ]
+        ];
+    }
+
     /**
      * Mount
      * @return void

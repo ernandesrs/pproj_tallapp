@@ -50,6 +50,14 @@ trait ListTrait
             }
         }
 
+        if (count($this->betweenDates)) {
+            foreach ($this->betweenDates as $key => $between) {
+                if (!empty($between['start']) && !empty($between['end'])) {
+                    $model = $model->whereBetween($key, [$between['start'], $between['end']]);
+                }
+            }
+        }
+
         if (self::searchables()) {
             $model = $model->when($this->search, function (Builder $query) {
                 return $query->whereRaw('MATCH(' . self::searchables() . ') AGAINST(? IN BOOLEAN MODE)', $this->search);

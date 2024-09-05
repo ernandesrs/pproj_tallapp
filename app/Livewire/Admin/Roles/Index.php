@@ -35,6 +35,11 @@ class Index extends Component
         return [];
     }
 
+    static public function filterBetweenDates(): array
+    {
+        return [];
+    }
+
     /**
      * Render view
      * @return mixed

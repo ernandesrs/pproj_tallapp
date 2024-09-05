@@ -22,5 +22,10 @@ trait Filter
     #[Url(except: '', nullable: false)]
     public array $selects = [];
 
+    #[Url()]
+    public array $betweenDates = [];
+
     abstract static public function filterSelects(): array;
+
+    abstract static public function filterBetweenDates(): array;
 }
