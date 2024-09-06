@@ -30,13 +30,7 @@
                 class="col-span-12">
                 <div class="flex justify-center items-center gap-6">
                     <div>
-                        @if ($user->avatar)
-                            <x-avatar
-                                image="{{ \Str::startsWith($user->avatar, ['http://', 'https://']) ? $user->avatar : \Storage::url($user->avatar) }}"
-                                lg />
-                        @else
-                            <x-avatar text="{{ $user->first_name }}" lg />
-                        @endif
+                        <x-admin.custom-avatar :avatar="$user->avatar" text="{{ $user->first_name }}" lg />
                     </div>
 
                     @if ($user->avatar)

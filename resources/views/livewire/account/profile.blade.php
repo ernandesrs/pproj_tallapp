@@ -8,14 +8,7 @@
             class="col-span-12">
             <div class="flex flex-col gap-y-3">
                 <div class="flex-1 flex items-center gap-5">
-                    @if (!empty($user->avatar))
-                        <x-avatar
-                            :image="\Str::startsWith($user->avatar, ['http://', 'https://'])
-                                ? $user->avatar
-                                : \Storage::url($user->avatar)" lg />
-                    @else
-                        <x-avatar text="{{ $user->username[0] }}" lg />
-                    @endif
+                    <x-admin.custom-avatar :avatar="$user->avatar" text="{{ $user->first_name }}" lg />
 
                     <div class="flex-1">
                         <x-upload wire:model="avatar" delete delete-method="deleteAvatar"

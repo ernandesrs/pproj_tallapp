@@ -109,11 +109,7 @@
                                     @php
                                         $authUser = \Auth::user();
                                     @endphp
-                                    <x-avatar :image="$authUser->avatar
-                                        ? (\Str::startsWith($authUser->avatar, ['http://', 'https://'])
-                                            ? $authUser->avatar
-                                            : \Storage::url($authUser->avatar))
-                                        : null" text="{{ $authUser->first_name }}" xs />
+                                    <x-admin.custom-avatar :avatar="$authUser->avatar" text="{{ $authUser->first_name }}" xs />
                                 </div>
                             </x-slot:action>
 
