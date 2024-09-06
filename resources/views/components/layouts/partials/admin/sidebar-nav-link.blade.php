@@ -68,7 +68,7 @@
             }
         }"
 
-        class="flex gap-x-3 px-5 py-3 rounded-md mb-1 duration-200 hover:bg-indigo-400 dark:hover:bg-indigo-500 {{ $isActive ? 'bg-indigo-400 dark:bg-indigo-500 text-zinc-200' : '' }}"
+        class="flex gap-x-3 px-5 py-3 rounded-md mb-1 duration-200 hover:text-zinc-100 hover:bg-indigo-400 dark:hover:bg-indigo-500 {{ $isActive ? 'bg-indigo-400 text-zinc-100 dark:bg-indigo-500' : '' }}"
         :class="{ 'justify-center': asideMiniOn }"
         {{ $attributes }}>
 
