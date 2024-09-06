@@ -77,8 +77,8 @@ class Index extends Component
             'headers' => [
                 ['index' => 'id', 'label' => 'ID'],
                 ['view' => 'livewire.admin.users.partials.avatar', 'label' => 'Avatar'],
-                ['callable' => fn($row) => $row->first_name . ' ' . $row->last_name, 'label' => 'Nome'],
-                ['index' => 'email', 'label' => 'E-mail'],
+                ['view' => 'livewire.admin.users.partials.detail', 'label' => 'Usuário'],
+                ['view' => 'livewire.admin.users.partials.roles', 'label' => 'Cargos'],
                 ['index' => 'action', 'label' => 'Ações']
             ],
             'rows' => $this->getItems()
