@@ -8,7 +8,17 @@ Esta aplicação se trata do desenvolvimento de, desde recursos básicos de aute
 
 # SCREENSHOTS
 
+## Admin Overview
+
 ![Overview Preview](resources/img/screenshot/tallapp-overview.png)
+
+## Admin Users List
+
+![Overview Users List](resources/img/screenshot/tallapp-users-list.png)
+
+## Admin User Edit
+
+![Overview User Edit](resources/img/screenshot/tallapp-user-edit.png)
 
 # RECURSOS DESENVOLVIDOS
 
