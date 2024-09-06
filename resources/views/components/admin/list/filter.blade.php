@@ -16,7 +16,7 @@
         <div class="col-span-2 md:col-span-5 xl:col-span-7"></div>
         <div class="col-span-7 md:col-span-5 xl:col-span-4 flex items-end gap-x-2">
             <div class="flex-1">
-                <x-input wire:model.debounce.live="search" label="Buscar..." placeholder="Buscar..." />
+                <x-input wire:model.debounce.live.debounce.500ms="search" label="Buscar..." placeholder="Buscar..." />
             </div>
             <x-button x-show="!showMoreFilters" x-on:click="showMoreFilters=!showMoreFilters" icon="filter"
                 color="zinc" />
