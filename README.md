@@ -10,15 +10,19 @@ Esta aplicação se trata do desenvolvimento de, desde recursos básicos de aute
 
 ## Admin Overview
 
-![Overview Preview](resources/img/screenshot/tallapp-overview.png)
+![Overview Preview](resources/img/screenshots/tallapp-overview.png)
+
+## Dark and Light mode
+
+![Overview Preview](resources/img/screenshots/tallapp-overview-dark-and-light.png)
 
 ## Admin Users List
 
-![Overview Users List](resources/img/screenshot/tallapp-users-list.png)
+![Overview Users List](resources/img/screenshots/tallapp-users-list.png)
 
 ## Admin User Edit
 
-![Overview User Edit](resources/img/screenshot/tallapp-user-edit.png)
+![Overview User Edit](resources/img/screenshots/tallapp-user-edit.png)
 
 # RECURSOS DESENVOLVIDOS
 
