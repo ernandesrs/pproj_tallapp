@@ -30,8 +30,8 @@
 
             <div class="bg-zinc-900 dark:bg-zinc-950 w-full h-screen overflow-y-auto text-zinc-300"
                 :class="{
-                    'px-3 py-4': asideMiniOn,
-                    'px-6 py-4': !asideMiniOn,
+                    'px-3 py-2': asideMiniOn,
+                    'px-6 py-2': !asideMiniOn,
                 }">
 
                 <x-layouts.partials.admin.sidebar-section
@@ -87,7 +87,13 @@
                             'permissions' => [\App\Enums\Roles\Permissions\RolePermissionsEnum::VIEW_ANY],
                             'route' => ['name' => 'admin.roles.index'],
                             'activeIn' => ['admin.roles.index', 'admin.roles.create', 'admin.roles.edit'],
-                        ],
+                        ]
+                    ]" />
+                </x-layouts.partials.admin.sidebar-section>
+
+                <x-layouts.partials.admin.sidebar-section
+                    title="Outros">
+                    <x-layouts.partials.admin.sidebar-nav :items="[
                         [
                             'icon' => 'user-circle',
                             'text' => 'Meu perfil',
@@ -95,11 +101,6 @@
                             'activeIn' => ['account.profile'],
                         ],
                     ]" />
-                </x-layouts.partials.admin.sidebar-section>
-
-                <x-layouts.partials.admin.sidebar-section
-                    title="Others">
-                    CONTENT
                 </x-layouts.partials.admin.sidebar-section>
 
             </div>
