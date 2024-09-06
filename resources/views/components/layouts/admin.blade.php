@@ -49,6 +49,7 @@
                             'permissions' => [\App\Enums\Roles\Permissions\UserPermissionsEnum::VIEW_ANY],
                             'activeIn' => [
                                 'admin.users.index',
+                                'admin.users.admins',
                                 'admin.users.create',
                                 'admin.users.show',
                                 'admin.users.edit',
@@ -60,6 +61,16 @@
                                     'route' => ['name' => 'admin.users.index'],
                                     'activeIn' => ['admin.users.index'],
                                     'permissions' => [\App\Enums\Roles\Permissions\UserPermissionsEnum::VIEW_ANY],
+                                ],
+                                [
+                                    'icon' => 'user-shield',
+                                    'text' => 'Administradores',
+                                    'route' => ['name' => 'admin.users.admins'],
+                                    'activeIn' => ['admin.users.admins'],
+                                    'permissions' => [
+                                        \App\Enums\Roles\Permissions\UserPermissionsEnum::UPDATE_ADMIN,
+                                        \App\Enums\Roles\Permissions\UserPermissionsEnum::DELETE_ADMIN,
+                                    ],
                                 ],
                                 [
                                     'icon' => 'user-plus',

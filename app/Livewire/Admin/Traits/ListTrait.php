@@ -17,9 +17,9 @@ trait ListTrait
 
     /**
      * Model
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Builder
      */
-    abstract static function model(): Model;
+    abstract static function model(): Model|Builder;
 
     /**
      * Searchable fields
@@ -47,7 +47,11 @@ trait ListTrait
         $search = $validData['search'] ?? null;
         $quantity = $validData['quantity'] ?? 10;
 
-        $model = self::model()->query();
+        if (self::model() instanceof (Model::class)) {
+            $model = self::model()->query();
+        } else {
+            $model = self::model();
+        }
 
         // Apply selects filter
         if (count($selects)) {
