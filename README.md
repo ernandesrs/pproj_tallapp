@@ -6,6 +6,10 @@ O Tall App foi criado com a finalidade de estudo das tecnologias envolvidas.
 
 Esta aplicação se trata do desenvolvimento de, desde recursos básicos de autenticação à gerenciamento de usuários e cargos, atravéz de um painel administrativo, nele aplico conhecimentos adquiridos nestas tecnologias.
 
+# SCREENSHOTS
+
+![Overview Preview](resources/img/screenshot/tallapp-overview.png)
+
 # RECURSOS DESENVOLVIDOS
 
 1. Autenticação: login, registro, envio e reenvio de link de verificação de registro, envio de email de recuperação de senha;
@@ -13,9 +17,9 @@ Esta aplicação se trata do desenvolvimento de, desde recursos básicos de aute
 
 # REQUISITOS
 
-- PHP 8.1 ou superior
-- Composer 2.4.1 ou superior
-- Node v18.8.0 ou superior
+-   PHP 8.1 ou superior
+-   Composer 2.4.1 ou superior
+-   Node v18.8.0 ou superior
 
 # INSTALAÇÃO
 
