@@ -4,15 +4,35 @@ namespace App\Livewire\Admin\Users;
 
 use App\Livewire\Admin\Traits\ListTrait;
 use App\Models\User;
+use App\Services\UserService;
 use Livewire\Component;
+use TallStackUi\Traits\Interactions;
 
 class AdminIndex extends Component
 {
-    use ListTrait;
+    use ListTrait, Interactions;
 
-    function deleteItem(int $id): void
+    /**
+     * Delete admin
+     * @param int $id
+     * @return void
+     */
+    public function deleteItem(int $id): void
     {
-        return;
+        $user = User::where('id', $id)->firstOrFail(['id', 'first_name', 'last_name']);
+
+        $this->authorize('deleteAdmin', $user);
+
+        if (!UserService::delete($user)) {
+            $this->toast()
+                ->error('Falha!', 'O administrador não pode ser excluido!')
+                ->send();
+            return;
+        }
+
+        $this->toast()
+            ->info('Excluído!', 'O administrador foi excluído com sucesso!')
+            ->send();
     }
 
     static function model(): \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Builder

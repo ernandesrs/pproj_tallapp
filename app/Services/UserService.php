@@ -89,15 +89,23 @@ class UserService implements ServicesInterface
 
     /**
      * Delete user
+     * * Delete avatar
+     * * Revoke all roles
      * @param \Illuminate\Database\Eloquent\Model $model
      * @param array $options
      * @return bool
      */
     static public function delete(\Illuminate\Database\Eloquent\Model $model, array $options = []): bool
     {
+        /**
+         * @var \App\Models\User $model
+         */
+
         if ($model->avatar) {
             self::deleteAvatar($model);
         }
+
+        $model->roles()->get(['id'])->map(fn($role) => $model->removeRole($role->id));
 
         if ($options['notify_user'] ?? false) {
             // do something, like notify user about profile update
