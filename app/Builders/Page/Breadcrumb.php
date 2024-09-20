@@ -55,9 +55,9 @@ class Breadcrumb
     function get(bool $withoutHome = false)
     {
         return $withoutHome ? $this->items : [
-            [
+            (object) [
                 'label' => 'Home',
-                'route' => (object) [
+                'route' => [
                     'name' => $this->homeRouteName,
                     'params' => $this->homeRouteParams
                 ]

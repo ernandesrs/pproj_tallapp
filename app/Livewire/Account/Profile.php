@@ -63,12 +63,17 @@ class Profile extends Component
      */
     public function render()
     {
-        return view('livewire..account.profile')
-            ->layout('components.layouts.admin', [
-                'seo' => (object) [
-                    'title' => 'Meu perfil'
-                ]
-            ]);
+        $page = new \App\Builders\Page\Page(
+            'Meu perfil',
+            \App\Builders\Page\Breadcrumb::make('admin.overview')
+                ->add('Meu perfil', ['name' => 'account.profile'])
+        );
+
+        return view('livewire..account.profile', [
+            'page' => $page
+        ])->layout('components.layouts.admin', [
+                    'page' => $page
+                ]);
     }
 
     /**

@@ -62,7 +62,14 @@ class Index extends Component
     {
         $this->authorize('viewAny', Role::class);
 
+        $page = new \App\Builders\Page\Page(
+            'Cargos',
+            \App\Builders\Page\Breadcrumb::make('admin.overview')
+                ->add('Cargos', ['name' => 'admin.roles.index'])
+        );
+
         return view('livewire..admin.roles.index', [
+            'page' => $page,
             'headers' => [
                 ['index' => 'id', 'label' => 'ID'],
                 ['index' => 'display_name', 'label' => 'Nome'],
@@ -72,9 +79,7 @@ class Index extends Component
             'rows' => $this->getItems(),
         ])
             ->layout('components.layouts.admin', [
-                'seo' => (object) [
-                    'title' => 'Cargos'
-                ]
+                'page' => $page
             ]);
     }
 

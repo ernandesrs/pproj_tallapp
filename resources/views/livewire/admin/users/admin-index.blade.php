@@ -1,4 +1,5 @@
-<x-admin.page>
+<x-admin.page
+    :page="$page">
 
     <x-slot:actions>
         @can('viewAny', \App\Models\User::class)

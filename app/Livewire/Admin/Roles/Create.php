@@ -25,12 +25,18 @@ class Create extends Component
     {
         $this->authorize('create', Role::class);
 
-        return view('livewire..admin.roles.create')
-            ->layout('components.layouts.admin', [
-                'seo' => (object) [
-                    'title' => 'Novo cargo'
-                ]
-            ]);
+        $page = new \App\Builders\Page\Page(
+            'Novo cargo',
+            \App\Builders\Page\Breadcrumb::make('admin.overview')
+                ->add('Cargos', ['name' => 'admin.roles.index'])
+                ->add('Criar', ['name' => 'admin.roles.create'])
+        );
+
+        return view('livewire..admin.roles.create', [
+            'page' => $page
+        ])->layout('components.layouts.admin', [
+                    'page' => $page
+                ]);
     }
 
     /**

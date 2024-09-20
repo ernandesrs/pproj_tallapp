@@ -49,12 +49,18 @@ class Edit extends Component
     {
         $this->authorize('update', $this->role);
 
-        return view('livewire..admin.roles.edit')
-            ->layout('components.layouts.admin', [
-                'seo' => (object) [
-                    'title' => 'Editar cargo'
-                ]
-            ]);
+        $page = new \App\Builders\Page\Page(
+            'Editar cargo',
+            \App\Builders\Page\Breadcrumb::make('admin.overview')
+                ->add('Cargos', ['name' => 'admin.roles.index'])
+                ->add('Editar', ['name' => 'admin.roles.edit', 'params' => ['role' => $this->role->id]])
+        );
+
+        return view('livewire..admin.roles.edit', [
+            'page' => $page
+        ])->layout('components.layouts.admin', [
+                    'page' => $page
+                ]);
     }
 
     /**

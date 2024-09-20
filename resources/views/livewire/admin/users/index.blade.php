@@ -1,5 +1,5 @@
 <x-admin.page
-    title="Usuários">
+    :page="$page">
 
     <x-slot:actions>
         @can('create', \App\Models\User::class)

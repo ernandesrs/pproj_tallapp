@@ -4,14 +4,13 @@ namespace App\Livewire\Admin\Users;
 
 use App\Models\User;
 use App\Services\UserService;
-use App\Traits\Pages\PageTrait;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use TallStackUi\Traits\Interactions;
 
 class Create extends Component
 {
-    use PageTrait, Interactions;
+    use Interactions;
 
     #[Validate('boolean')]
     public bool $send_confirmation_email = false;
@@ -31,22 +30,6 @@ class Create extends Component
     public ?string $password_confirmation = null;
 
     /**
-     * Page
-     * @param mixed $model
-     * @return \App\Builders\Page\Page
-     */
-    static function page(mixed $model = null): \App\Builders\Page\Page
-    {
-        return new \App\Builders\Page\Page(
-            'Novo usuário',
-            \App\Builders\Page\Breadcrumb
-                ::make('admin.overview')
-                ->add('Usuários', ['name' => 'admin.users.index'])
-                ->add('Criar', ['name' => 'admin.users.create'])
-        );
-    }
-
-    /**
      * Mount
      * @return void
      */
@@ -63,10 +46,19 @@ class Create extends Component
     {
         $this->authorize('create', User::class);
 
-        return view('livewire..admin.users.create')
-            ->layout('components.layouts.admin', [
-                'page' => self::page()
-            ]);
+        $page = new \App\Builders\Page\Page(
+            'Novo usuário',
+            \App\Builders\Page\Breadcrumb
+                ::make('admin.overview')
+                ->add('Usuários', ['name' => 'admin.users.index'])
+                ->add('Criar', ['name' => 'admin.users.create'])
+        );
+
+        return view('livewire..admin.users.create', [
+            'page' => $page
+        ])->layout('components.layouts.admin', [
+                    'page' => $page
+                ]);
     }
 
     /**

@@ -1,5 +1,5 @@
 <x-admin.page
-    title="Cargos">
+    :page="$page">
 
     <x-slot:actions>
         @can('create', \App\Models\Role::class)

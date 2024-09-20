@@ -1,6 +1,5 @@
 <x-admin.page
-    title="Editar usuário">
-
+    :page="$page">
     <x-slot:actions>
         @can('create', \App\Models\User::class)
             <x-button wire:navigate href="{{ route('admin.users.create') }}" color="emerald" icon="plus" position="left">

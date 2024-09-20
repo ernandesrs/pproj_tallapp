@@ -1,5 +1,5 @@
 <x-admin.page
-    title="Meu perfil">
+    :page="$page">
 
     <div class="col-span-12 md:col-span-4 grid gap-6">
         <x-admin.content-card

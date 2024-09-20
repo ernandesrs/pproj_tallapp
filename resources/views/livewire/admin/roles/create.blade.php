@@ -1,5 +1,5 @@
 <x-admin.page
-    title="Novo cargo">
+    :page="$page">
 
     <x-admin.content-card class="col-span-12">
         <x-admin.form

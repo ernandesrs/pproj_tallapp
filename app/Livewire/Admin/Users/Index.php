@@ -5,29 +5,13 @@ namespace App\Livewire\Admin\Users;
 use App\Livewire\Admin\Traits\ListTrait;
 use App\Models\User;
 use App\Services\UserService;
-use App\Traits\Pages\PageTrait;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use TallStackUi\Traits\Interactions;
 
 class Index extends Component
 {
-    use PageTrait, ListTrait, Interactions;
-
-    /**
-     * Page
-     * @param mixed $model
-     * @return \App\Builders\Page\Page
-     */
-    static function page(mixed $model = null): \App\Builders\Page\Page
-    {
-        return new \App\Builders\Page\Page(
-            'Usuários',
-            \App\Builders\Page\Breadcrumb
-                ::make('admin.overview')
-                ->add('Usuários', ['name' => 'admin.users.index'])
-        );
-    }
+    use ListTrait, Interactions;
 
     /**
      * Model
@@ -89,7 +73,15 @@ class Index extends Component
     {
         $this->authorize('viewAny', User::class);
 
+        $page = new \App\Builders\Page\Page(
+            'Usuários',
+            \App\Builders\Page\Breadcrumb
+                ::make('admin.overview')
+                ->add('Usuários', ['name' => 'admin.users.index'])
+        );
+
         return view('livewire..admin.users.index', [
+            'page' => $page,
             'headers' => [
                 ['index' => 'id', 'label' => 'ID'],
                 ['view' => 'livewire.admin.users.partials.avatar', 'label' => 'Avatar'],
@@ -99,7 +91,7 @@ class Index extends Component
             ],
             'rows' => $this->getItems()
         ])->layout('components.layouts.admin', [
-                    'page' => self::page()
+                    'page' => $page
                 ]);
     }
 
