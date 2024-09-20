@@ -4,13 +4,14 @@ namespace App\Livewire\Admin\Users;
 
 use App\Models\User;
 use App\Services\UserService;
+use App\Traits\Pages\PageTrait;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 use TallStackUi\Traits\Interactions;
 
 class Edit extends Component
 {
-    use Interactions;
+    use PageTrait, Interactions;
 
     public string $id = 'jfklajflaskd';
 
@@ -35,6 +36,22 @@ class Edit extends Component
     public ?string $password_confirmation = null;
 
     /**
+     * Page
+     * @param mixed $model
+     * @return \App\Builders\Page\Page
+     */
+    static function page(mixed $model = null): \App\Builders\Page\Page
+    {
+        return new \App\Builders\Page\Page(
+            'Editar usuário',
+            \App\Builders\Page\Breadcrumb
+                ::make('admin.overview')
+                ->add('Usuários', ['name' => 'admin.users.index'])
+                ->add('Editar', ['name' => 'admin.users.edit', 'params' => ['user' => $model->id ?? null]])
+        );
+    }
+
+    /**
      * Mount
      * @param \App\Models\User $user
      * @return void
@@ -54,11 +71,9 @@ class Edit extends Component
     {
         $this->authorize('update', $this->user);
 
-        return view('livewire..admin.users.edit')
+        return view('livewire..admin.users.edit', )
             ->layout('components.layouts.admin', [
-                'seo' => (object) [
-                    'title' => 'Editar usuário'
-                ]
+                'page' => self::page($this->user)
             ]);
     }
 

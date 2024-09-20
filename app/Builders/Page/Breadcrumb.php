@@ -19,6 +19,17 @@ class Breadcrumb
     }
 
     /**
+     * Make a breadcrumb
+     * @param string $homeRouteName
+     * @param array $homeRouteParams
+     * @return Breadcrumb
+     */
+    static function make(string $homeRouteName, array $homeRouteParams = [])
+    {
+        return new Breadcrumb($homeRouteName, $homeRouteParams);
+    }
+
+    /**
      * Add a breadcrumb item
      * @param string $label
      * @param array $route
@@ -62,7 +73,7 @@ class Breadcrumb
     function getAsTitle()
     {
         return implode(
-            ' - ',
+            ' › ',
             array_map(
                 fn($item) => $item->label,
                 $this->get(!\Route::currentRouteName() == $this->homeRouteName ? false : true)

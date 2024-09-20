@@ -5,12 +5,29 @@ namespace App\Livewire\Admin\Users;
 use App\Livewire\Admin\Traits\ListTrait;
 use App\Models\User;
 use App\Services\UserService;
+use App\Traits\Pages\PageTrait;
 use Livewire\Component;
 use TallStackUi\Traits\Interactions;
 
 class AdminIndex extends Component
 {
-    use ListTrait, Interactions;
+    use PageTrait, ListTrait, Interactions;
+
+    /**
+     * Page
+     * @param mixed $model
+     * @return \App\Builders\Page\Page
+     */
+    static function page(mixed $model = null): \App\Builders\Page\Page
+    {
+        return new \App\Builders\Page\Page(
+            'Administradores',
+            \App\Builders\Page\Breadcrumb
+                ::make('admin.overview')
+                ->add('Administradores', ['name' => 'admin.users.index']),
+            'Listando apenas administradores'
+        );
+    }
 
     /**
      * Delete admin
@@ -82,11 +99,8 @@ class AdminIndex extends Component
                 ['index' => 'action', 'label' => 'Ações']
             ],
             'rows' => $this->getItems()
-        ])
-            ->layout('components.layouts.admin', [
-                'seo' => (object) [
-                    'title' => 'Administradores'
-                ]
-            ]);
+        ])->layout('components.layouts.admin', [
+                    'page' => self::page()
+                ]);
     }
 }

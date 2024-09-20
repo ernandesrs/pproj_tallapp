@@ -11,8 +11,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{{ $seo?->title ?? 'Page Title' }} | {{ config('app.name') }} Admin</title>
-    <x-layouts.partials.seo :seo="$seo ?? null" />
+    @php
+        throw_if(empty($page), 'Requires a "\App\Builders\Page\Page" instance to "page" prop.');
+    @endphp
+
+    <x-layouts.partials.seo
+        :page="$page ?? null"
+        append-title="{{ config('app.name') }} Admin" />
 
     <link rel="shortcut icon" href="{{ asset('assets/admin/img/logo-light.svg') }}" type="image/x-icon">
 
@@ -87,7 +92,7 @@
                             'permissions' => [\App\Enums\Roles\Permissions\RolePermissionsEnum::VIEW_ANY],
                             'route' => ['name' => 'admin.roles.index'],
                             'activeIn' => ['admin.roles.index', 'admin.roles.create', 'admin.roles.edit'],
-                        ]
+                        ],
                     ]" />
                 </x-layouts.partials.admin.sidebar-section>
 

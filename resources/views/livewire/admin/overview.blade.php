@@ -1,6 +1,5 @@
 <x-admin.page
-    hide-header
-    title="Visão geral">
+    hide-header>
 
     @can('viewAny', \App\Models\User::class)
         <x-admin.overview-card

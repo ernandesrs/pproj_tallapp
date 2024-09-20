@@ -1,5 +1,4 @@
-<x-admin.page
-    title="Administradores">
+<x-admin.page>
 
     <x-slot:actions>
         @can('viewAny', \App\Models\User::class)
